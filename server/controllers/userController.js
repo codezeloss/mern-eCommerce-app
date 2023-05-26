@@ -67,7 +67,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
     }
 })
 
-// @desc   Get a single user
+// @desc   Get a user
 // @route  GET /:id
 // @access Private
 const getUser = asyncHandler(async (req, res) => {
@@ -82,7 +82,7 @@ const getUser = asyncHandler(async (req, res) => {
 
 })
 
-// @desc   Delete a single user
+// @desc   Delete a user
 // @route  DELETE /:id
 // @access Private
 const deleteUser = asyncHandler(async (req, res) => {
@@ -97,7 +97,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 })
 
-// @desc   Update a single user
+// @desc   Update a user
 // @route  PUT /:id
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
