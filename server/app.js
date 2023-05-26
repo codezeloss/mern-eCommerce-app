@@ -6,14 +6,17 @@ const cookieParser = require("cookie-parser");
 const colors = require("colors");
 
 const authRoute = require('./routes/authRoute')
+const productRoute = require('./routes/productRoute')
 const {notFound, errorHandler} = require("./middlewares/errorHandler");
 
 // MIDDLEWARES
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
+app.use(cookieParser())
 
 // ROUTES
 app.use("/api/user", authRoute)
+app.use("/api/product", productRoute)
 
 // ERROR HANDLERS
 app.use(notFound)
