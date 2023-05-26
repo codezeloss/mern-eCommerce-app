@@ -13,6 +13,7 @@ const {notFound, errorHandler} = require("./middlewares/errorHandler");
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(cookieParser())
+app.use(morgan("dev"))
 
 // ROUTES
 app.use("/api/user", authRoute)

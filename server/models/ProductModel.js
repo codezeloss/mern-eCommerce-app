@@ -19,15 +19,16 @@ const ProductSchema = new Schema({
         required: true
     },
     category: {
-        type: Schema.Types.ObjectId,
-        ref: "Category"
+        type: String,
+        required: true
     },
     brand: {
         type: String,
-        enum: ["Apple", "Samsung", "Lenovo"]
+        required: true
     },
     quantity: {
         type: Number,
+        required: true
     },
     sold: {
         type: Number,
@@ -38,7 +39,7 @@ const ProductSchema = new Schema({
     },
     color: {
         type: String,
-        enum: ["Black", "Brown", "Red"]
+        required: true
     },
     ratings: [
         {
