@@ -5,8 +5,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const colors = require("colors");
 
-const authRoute = require('./routes/authRoute')
-const productRoute = require('./routes/productRoute')
+const authRouter = require('./routes/authRoute')
+const productRouter = require('./routes/productRoute')
+const blogRouter = require('./routes/blogRoute')
 const {notFound, errorHandler} = require("./middlewares/errorHandler");
 
 // MIDDLEWARES
@@ -16,8 +17,9 @@ app.use(cookieParser())
 app.use(morgan("dev"))
 
 // ROUTES
-app.use("/api/user", authRoute)
-app.use("/api/product", productRoute)
+app.use("/api/user", authRouter)
+app.use("/api/product", productRouter)
+app.use("/api/blog", blogRouter)
 
 // ERROR HANDLERS
 app.use(notFound)

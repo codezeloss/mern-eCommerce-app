@@ -32,7 +32,8 @@ const ProductSchema = new Schema({
     },
     sold: {
         type: Number,
-        default: 0
+        default: 0,
+        select: false
     },
     images: {
         type: Array

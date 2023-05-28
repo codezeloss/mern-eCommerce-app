@@ -1,5 +1,6 @@
 const {model, Schema} = require("mongoose");
 const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 
 const UserSchema = new Schema({
     firstname: {
@@ -46,13 +47,26 @@ const UserSchema = new Schema({
     },
     refreshToken: {
         type: String
-    }
+    },
+    passwordChangedAt: {
+        type: Date
+    },
+    passwordResetToken: {
+        type: String
+    },
+    passwordResetExpires: {
+        type: Date
+    },
 }, {
     timestamps: true
 })
 
 // hash password
 UserSchema.pre('save', async function (next) {
+    if(!this.isModified("password")) {
+        next()
+    }
+
     const salt = bcrypt.genSaltSync(10);
     this.password = bcrypt.hashSync(this.password, salt)
 })
@@ -60,6 +74,14 @@ UserSchema.pre('save', async function (next) {
 // Compare passwords
 UserSchema.methods.isPasswordMatched = async function (enteredPassword) {
     return bcrypt.compareSync(enteredPassword, this.password)
+}
+
+// Generate Password Reset Token
+UserSchema.methods.createPasswordResetToken = async function () {
+    const resetToken = crypto.randomBytes(32).toString('hex')
+    this.passwordResetToken = crypto.createHash("sha256").update(resetToken).digest("hex")
+    this.passwordResetExpires = Date.now() + 30 * 60 * 1000 // 10 mins
+    return resetToken
 }
 
 const User = model("User", UserSchema)
