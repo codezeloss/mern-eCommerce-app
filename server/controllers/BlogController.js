@@ -39,8 +39,11 @@ const getBlogPost = asyncHandler(async (req, res) => {
     validateMongodbId(id)
 
     try {
-        const blogPost = await Blog.findById(id)
-        const updateViews = await Blog.findByIdAndUpdate(id, {$inc: {numViews: 1}}, {new: true})
+        const blogPost = await Blog.findById(id).populate("likes")
+
+        // Increment the number of views
+        await Blog.findByIdAndUpdate(id, {$inc: {numViews: 1}}, {new: true})
+
         res.json(blogPost)
     } catch (error) {
         throw new Error(error)
@@ -75,32 +78,83 @@ const deleteBlogPost = asyncHandler(async (req, res) => {
 })
 
 // @desc   Like a Blog Post
-// @route  DELETE /:id
+// @route  PUT /likes
 // @access
 const likeBlogPost = asyncHandler(async (req, res) => {
-    const {blogId} = req.body
+    const { blogId } = req.body
     validateMongodbId(blogId)
 
     // Find the blog post that will be liked
     const blogPost = await Blog.findById(blogId)
 
-    // Find the ID of the logged-In user
+    // Get the ID of the logged-In user (from the authMiddleware)
     const loggedUserId = req?.user?._id
 
-    // Find if the user has liked the post
+    // Check if the user has liked/disliked the post
     const isLiked = blogPost?.isLiked
-
-    // Find if the user has disliked the post
-    const alreadyDisliked = blog?.dislikes?.find({userId: userId?.toString() === loggedUserId?.toString()})
+    const alreadyDisliked = blogPost?.dislikes?.find((userId) => userId?.toString() === loggedUserId?.toString())
 
     if(alreadyDisliked) {
         const blogPost = await Blog.findByIdAndUpdate(blogId, {
             $pull: {dislikes: loggedUserId},
             isDisliked: false
-        })
+        }, {new: true})
+        res.json(blogPost)
     }
 
+    if(isLiked) {
+        const blogPost = await Blog.findByIdAndUpdate(blogId, {
+            $pull: {likes: loggedUserId},
+            isLiked: false
+        }, {new: true})
+        res.json(blogPost)
+    } else {
+        const blogPost = await Blog.findByIdAndUpdate(blogId, {
+            $push: {likes: loggedUserId},
+            isLiked: true
+        }, {new: true})
+        res.json(blogPost)
+    }
+})
 
+// @desc   Dislike a Blog Post
+// @route  PUT /dislikes
+// @access
+const dislikeBlogPost = asyncHandler(async (req, res) => {
+    const { blogId } = req.body
+    validateMongodbId(blogId)
+
+    // Find the blog post that will be liked
+    const blogPost = await Blog.findById(blogId)
+
+    // Get the ID of the logged-In user (from the authMiddleware)
+    const loggedUserId = req?.user?._id
+
+    // Check if the user has liked/disliked the post
+    const isDisliked = blogPost?.isDisliked
+    const alreadyLiked = blogPost?.likes?.find((userId) => userId?.toString() === loggedUserId?.toString())
+
+    if(alreadyLiked) {
+        const blogPost = await Blog.findByIdAndUpdate(blogId, {
+            $pull: {likes: loggedUserId},
+            isLiked: false
+        }, {new: true})
+        res.json(blogPost)
+    }
+
+    if(isDisliked) {
+        const blogPost = await Blog.findByIdAndUpdate(blogId, {
+            $pull: {dislikes: loggedUserId},
+            isDisliked: false
+        }, {new: true})
+        res.json(blogPost)
+    } else {
+        const blogPost = await Blog.findByIdAndUpdate(blogId, {
+            $push: {dislikes: loggedUserId},
+            isDisliked: true
+        }, {new: true})
+        res.json(blogPost)
+    }
 })
 
 module.exports = {
@@ -109,5 +163,6 @@ module.exports = {
     getBlogPost,
     getAllBlogPosts,
     deleteBlogPost,
-    likeBlogPost
+    likeBlogPost,
+    dislikeBlogPost
 }
