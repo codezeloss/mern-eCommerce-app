@@ -41,10 +41,10 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Address"
     },
-    wishlist: {
+    wishlist: [{
         type: Schema.Types.ObjectId,
         ref: "Product"
-    },
+    }],
     refreshToken: {
         type: String
     },

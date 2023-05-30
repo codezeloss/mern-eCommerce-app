@@ -8,7 +8,9 @@ const colors = require("colors");
 const authRouter = require('./routes/authRoute')
 const productRouter = require('./routes/productRoute')
 const blogRouter = require('./routes/blogRoute')
-const categoryRouter = require('./routes/categoryRoute')
+const productCategoryRouter = require('./routes/productCategoryRoute')
+const blogCategoryRouter = require('./routes/blogCategoryRoute')
+const brandRouter = require('./routes/brandRoute')
 const {notFound, errorHandler} = require("./middlewares/errorHandler");
 
 // MIDDLEWARES
@@ -21,7 +23,9 @@ app.use(morgan("dev"))
 app.use("/api/user", authRouter)
 app.use("/api/product", productRouter)
 app.use("/api/blog", blogRouter)
-app.use("/api/category", categoryRouter)
+app.use("/api/category", productCategoryRouter)
+app.use("/api/blogCategory", blogCategoryRouter)
+app.use("/api/brand", brandRouter)
 
 // ERROR HANDLERS
 app.use(notFound)
