@@ -44,7 +44,8 @@ const BlogSchema = new Schema({
     author: {
         type: String,
         default: "Admin"
-    }
+    },
+    images: []
     },
     {
         toJSON: {
