@@ -555,7 +555,8 @@ const updateOrder = asyncHandler(async (req, res) => {
             orderStatus: status,
             paymentIntent: {
                 status
-            }}, {new: true})
+            }},
+            {new: true})
         res.json(order)
     } catch (error) {
         throw new Error(error)
