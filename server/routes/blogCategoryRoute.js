@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {createBlogCategory, updateBlogCategory, deleteBlogCategory, getBlogCategory, getAllBlogCategories} = require("../controllers/BlogCategoryController");
+const {createBlogCategory, updateBlogCategory, deleteBlogCategory, getBlogCategory, getAllBlogCategories} = require("../controllers/blogCategoryController");
 const {authMiddleware, isAdmin} = require("../middlewares/authMiddleware");
 
 router.post("/", authMiddleware, isAdmin, createBlogCategory)

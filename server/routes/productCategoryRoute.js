@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {createProductCategory, updateProductCategory, deleteProductCategory, getProductCategory, getAllProductCategories} = require("../controllers/ProductCategoryController");
+const {createProductCategory, updateProductCategory, deleteProductCategory, getProductCategory, getAllProductCategories} = require("../controllers/productCategoryController");
 const {authMiddleware, isAdmin} = require("../middlewares/authMiddleware");
 
 router.post("/", authMiddleware, isAdmin, createProductCategory)

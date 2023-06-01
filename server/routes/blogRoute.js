@@ -3,7 +3,7 @@ const router = express.Router()
 const {isAdmin, authMiddleware} = require("../middlewares/authMiddleware");
 const {createBlogPost, updateBlogPost, getBlogPost, getAllBlogPosts, deleteBlogPost, likeBlogPost, dislikeBlogPost,
     uploadImages
-} = require("../controllers/BlogController");
+} = require("../controllers/blogController");
 const {uploadPhoto, blogImageResize} = require("../middlewares/uploadImages");
 
 router.post('/', authMiddleware, isAdmin, createBlogPost)
