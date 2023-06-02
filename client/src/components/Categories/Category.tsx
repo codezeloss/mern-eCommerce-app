@@ -4,9 +4,9 @@ import { Link } from "react-router-dom"
 function Category() {
   return (
     <Link to="/">
-      <div className="w-full flex items-center gap-2 p-8">
+      <div className="w-full flex items-center gap-2 p-5">
         <div>
-          <p className="text-sm font-semibold mb-2 hover:underline">
+          <p className="text-base font-semibold mb-2 hover:underline leading-5">
             Computers & Laptop
           </p>
           <p className="text-xs text-gray font-light">8 items</p>

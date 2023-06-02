@@ -20,10 +20,7 @@ function Banner({
             <p>{duration_desc}</p>
           </div>
 
-          <button
-            className="block w-fit text-white uppercase rounded-full px-5 py-2 bg-secondary text-xs"
-            type="button"
-          >
+          <button className="primary-btn" type="button">
             Buy Now
           </button>
         </div>
