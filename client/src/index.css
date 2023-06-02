@@ -19,3 +19,9 @@ a {
     text-decoration: none;
     display: inline-block;
 }
+
+@layer components {
+    .container {
+        @apply max-w-[1400px] mx-auto;
+    }
+}
