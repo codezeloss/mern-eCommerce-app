@@ -44,7 +44,7 @@ function Footer() {
         {/* Information */}
         <div>
           <h2 className="text-xl mb-4">Information</h2>
-          <div className="flex flex-col gap-3 font-light text-xs">
+          <div className="flex flex-col gap-3 font-light text-sm">
             <Link to="/">Privacy Policy</Link>
             <Link to="/">Refund Policy</Link>
             <Link to="/">Shipping Policy</Link>

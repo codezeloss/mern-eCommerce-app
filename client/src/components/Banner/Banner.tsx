@@ -9,7 +9,7 @@ function Banner({
 }: Props) {
   return (
     <div className="">
-      <div className="w-[455px] h-[320px] rounded-sm flex relative">
+      <div className="w-full h-[320px] rounded-sm flex relative">
         <div className="px-10 flex flex-col justify-center gap-6">
           <p className="uppercase text-orange-600 text-sm">{subtitle}</p>
 
@@ -28,9 +28,9 @@ function Banner({
           </button>
         </div>
 
-        <div className="w-[455px] h-[320px] absolute r-0 t-0 -z-10">
+        <div className="w-full h-[320px] absolute r-0 t-0 -z-10">
           <img
-            className="w-[455px] h-[320px] rounded-md"
+            className="w-full h-[320px] rounded-md object-cover"
             src={img_src}
             alt="Product"
           />

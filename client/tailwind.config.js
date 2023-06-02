@@ -7,6 +7,8 @@ export default {
         primary: "#020617",
         secondary: "#0f172a",
         "custom-orange": "#ffa726",
+        gray: "#475569",
+        lightGray: "#f3f4f6",
         white: "#ffffff",
       },
       fontFamily: {

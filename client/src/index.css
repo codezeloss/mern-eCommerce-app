@@ -22,6 +22,6 @@ a {
 
 @layer components {
     .container {
-        @apply max-w-[1400px] mx-auto;
+        @apply max-w-[1400px] mx-auto px-3;
     }
 }
