@@ -19,13 +19,13 @@ function HeaderOptions() {
             <Link className="uppercase text-xs" to="/">
               Home
             </Link>
-            <Link className="uppercase text-xs" to="/">
+            <Link className="uppercase text-xs" to="/store">
               Our Store
             </Link>
-            <Link className="uppercase text-xs" to="/">
+            <Link className="uppercase text-xs" to="/blogs">
               Blogs
             </Link>
-            <Link className="uppercase text-xs" to="/">
+            <Link className="uppercase text-xs" to="/contact">
               Contact
             </Link>
           </div>

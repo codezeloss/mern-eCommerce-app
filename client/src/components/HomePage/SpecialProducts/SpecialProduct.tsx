@@ -1,6 +1,6 @@
-import pic from "../../../public/images/tab1.jpg"
+import pic from "../../../../public/images/tab1.jpg"
 import { useState } from "react"
-import heart from "../../../public/icons/heart-black.svg"
+import heart from "../../../../public/icons/heart-black.svg"
 
 // ** MUI Imports
 import { styled } from "@mui/material/styles"
@@ -23,7 +23,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }))
 
-function Product() {
+function FamousProduct() {
   const [value, setValue] = useState(2)
 
   return (
@@ -38,19 +38,19 @@ function Product() {
 
         <div className="flex flex-col items-center">
           <div>
-            <img src={pic} alt="Product" />
+            <img src={pic} alt="FamousProduct" />
           </div>
 
           <div className="flex items-center gap-2">
             <img
               className="w-20 h-20 border border-gray/[.1] border-[1px]"
               src={pic}
-              alt="Product"
+              alt="FamousProduct"
             />
             <img
               className="w-20 h-20 border border-gray/[.1] border-[1px]"
               src={pic}
-              alt="Product"
+              alt="FamousProduct"
             />
           </div>
         </div>
@@ -99,4 +99,4 @@ function Product() {
   )
 }
 
-export default Product
+export default FamousProduct

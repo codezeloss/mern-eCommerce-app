@@ -1,4 +1,4 @@
-import bannerPic01 from "../../../public/images/catbanner-01.jpg"
+import bannerPic01 from "../../../../public/images/catbanner-01.jpg"
 
 function Banner({
   subtitle,
@@ -29,7 +29,7 @@ function Banner({
           <img
             className="w-full h-[320px] rounded-md object-cover"
             src={img_src}
-            alt="Product"
+            alt="FamousProduct"
           />
         </div>
       </div>

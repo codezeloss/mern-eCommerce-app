@@ -1,12 +1,12 @@
-import Banners from "../components/Banner/Banners"
-import Services from "../components/Services/Services"
-import Categories from "../components/Categories/Categories"
-import Marquees from "../components/Marquees/Marquees"
-import Blogs from "../components/LatestBlogs/Blogs"
-import FeaturedProducts from "../components/FeaturedCollection/FeaturedProducts"
-import SpecialProducts from "../components/SpecialProducts/SpecialProducts"
-import PopularProducts from "../components/PopularProucts/PopularProducts"
-import FamousProducts from "../components/FamousProducts/FamousProducts"
+import Banners from "../components/HomePage/Banner/Banners"
+import Services from "../components/HomePage/Services/Services"
+import Categories from "../components/HomePage/Categories/Categories"
+import Marquees from "../components/HomePage/Marquees/Marquees"
+import Blogs from "../components/HomePage/LatestBlogs/Blogs"
+import FeaturedProducts from "../components/HomePage/FeaturedProducts/FeaturedProducts"
+import SpecialProducts from "../components/HomePage/SpecialProducts/SpecialProducts"
+import PopularProducts from "../components/HomePage/PopularProucts/PopularProducts"
+import FamousProducts from "../components/HomePage/FamousProducts/FamousProducts"
 
 function Home() {
   return (
