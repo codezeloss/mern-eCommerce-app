@@ -57,10 +57,30 @@ function Header() {
             </div>
 
             <div className="flex space-x-4 py-6">
-              <HeaderLinks src={arrowPath} text_t="Compare" text_b="Products" />
-              <HeaderLinks src={heart} text_t="Favourite" text_b="Wishlist" />
-              <HeaderLinks src={user} text_t="Log in" text_b="My Account" />
-              <HeaderCart src={cart} quantity={"0"} total={"$0.00"} />
+              <HeaderLinks
+                path="compare-products"
+                src={arrowPath}
+                text_t="Compare"
+                text_b="Products"
+              />
+              <HeaderLinks
+                path="wishlist"
+                src={heart}
+                text_t="Favourite"
+                text_b="Wishlist"
+              />
+              <HeaderLinks
+                path="account"
+                src={user}
+                text_t="Log in"
+                text_b="My Account"
+              />
+              <HeaderCart
+                path="cart"
+                src={cart}
+                quantity={"0"}
+                total={"$0.00"}
+              />
             </div>
           </div>
         </div>

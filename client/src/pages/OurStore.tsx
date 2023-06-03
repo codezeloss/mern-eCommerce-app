@@ -7,7 +7,9 @@ import SideFilters from "../components/OurStorePage/SideFilters"
 function OurStore() {
   return (
     <>
-      <BreadCrumb title="Our Store" path="/store" />
+      <div className="flex items-center justify-center">
+        <BreadCrumb title="Our Store" path="/store" />
+      </div>
 
       <div className="bg-lightGray py-6">
         <div className="container">
@@ -16,9 +18,9 @@ function OurStore() {
               <SideFilters />
             </div>
 
-            <div>
+            <div className="mb-20">
               <TopFilters />
-              <div className="w-full h-full grid grid-cols-5 gap-4 py-4">
+              <div className="w-full h-full grid grid-cols-4 gap-4 py-4">
                 {productData.map((product) => (
                   <Product
                     src={product.image}

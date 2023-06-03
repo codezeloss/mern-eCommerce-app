@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 function BreadCrumb({ title, path }: Props) {
   return (
     <>
-      <p className="text-sm font-light text-center mb-20">
+      <p className="text-sm font-light text-center py-6">
         <meta charSet="utf-8" />
         <Link className="hover:underline" to="/">
           Home

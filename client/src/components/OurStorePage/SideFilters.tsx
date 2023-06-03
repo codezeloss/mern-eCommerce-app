@@ -1,5 +1,6 @@
 import ProductTag from "../ProductTag"
 import RandomProduct from "../RandomProduct"
+import { Link } from "react-router-dom"
 
 function SideFilters() {
   return (
@@ -7,18 +8,18 @@ function SideFilters() {
       <div className="bg-white rounded-md shadow-sm p-4 mb-3">
         <h2 className="text-base mb-3">Shop By Categories</h2>
         <div className="flex flex-col items-start text-xs text-gray/[.6] gap-2">
-          <button className="hover:underline" type="button">
+          <Link to="/" className="hover:underline" type="Link">
             Home
-          </button>
-          <button className="hover:underline" type="button">
+          </Link>
+          <Link to="/store" className="hover:underline" type="Link">
             Our Store
-          </button>
-          <button className="hover:underline" type="button">
+          </Link>
+          <Link to="/blogs" className="hover:underline" type="Link">
             Blogs
-          </button>
-          <button className="hover:underline" type="button">
+          </Link>
+          <Link to="/contact" className="hover:underline" type="Link">
             Contact
-          </button>
+          </Link>
         </div>
       </div>
 
