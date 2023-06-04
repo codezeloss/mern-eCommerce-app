@@ -36,28 +36,36 @@ function TopFilters({ grid, setGrid }: Props) {
         <p className="text-xs text-gray/[.5]">21 products</p>
         <div className="flex items-center gap-1">
           <button
-            className="p-2 bg-gray/[.1] rounded-md"
+            className={`p-2 rounded-md ${
+              grid === 4 ? "bg-gray/[.4]" : "bg-gray/[.1]"
+            }`}
             type="button"
             onClick={() => setGrid(4)}
           >
             <img className="w-3 h-3" src={gridIcon04} alt="Grid 4" />
           </button>
           <button
-            className="p-2 bg-gray/[.1] rounded-md"
+            className={`p-2 rounded-md ${
+              grid === 3 ? "bg-gray/[.4]" : "bg-gray/[.1]"
+            }`}
             type="button"
             onClick={() => setGrid(3)}
           >
             <img className="w-3 h-3" src={gridIcon03} alt="Grid 3" />
           </button>
           <button
-            className="p-2 bg-gray/[.1] rounded-md"
+            className={`p-2 rounded-md ${
+              grid === 2 ? "bg-gray/[.4]" : "bg-gray/[.1]"
+            }`}
             type="button"
             onClick={() => setGrid(2)}
           >
             <img className="w-3 h-3" src={gridIcon02} alt="Grid 2" />
           </button>
           <button
-            className="p-2 bg-gray/[.1] rounded-md"
+            className={`p-2 rounded-md ${
+              grid === 1 ? "bg-gray/[.4]" : "bg-gray/[.1]"
+            }`}
             type="button"
             onClick={() => setGrid(1)}
           >

@@ -3,12 +3,12 @@ import heart from "../../../public/icons/heart-black.svg"
 import { useState } from "react"
 import Rating from "@mui/material/Rating"
 
-function Product({ src, brand, title, price, grid }: Props) {
+function StoreProduct({ src, brand, title, price, grid }: Props) {
   const [value, setValue] = useState(2)
 
   return (
     <div
-      className={`w-full bg-white shadom-sm rounded-md p-4 ${
+      className={`w-full bg-white shadow-sm rounded-md p-4 ${
         grid === 1 ? "flex items-center gap-4" : ""
       }`}
     >
@@ -56,7 +56,7 @@ function Product({ src, brand, title, price, grid }: Props) {
   )
 }
 
-export default Product
+export default StoreProduct
 
 interface Props {
   src: any

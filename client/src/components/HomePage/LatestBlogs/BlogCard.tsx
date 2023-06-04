@@ -7,7 +7,7 @@ function BlogCard() {
         <img
           className="rounded-t-md object-cover w-full h-[200px]"
           src={picture}
-          alt="Blog"
+          alt="Blogs"
         />
       </div>
 

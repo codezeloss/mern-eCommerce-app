@@ -49,7 +49,7 @@ function Header() {
                 id="search-product"
                 name="search-product"
                 type="text"
-                placeholder="Seacrh FamousProduct Here..."
+                placeholder="Seacrh a product here..."
               />
               <div className="bg-[#ffa726] h-full flex items-center justify-center px-3 py-4 rounded-r-md">
                 <img className="w-4 h-4" src={searchGlass} alt={""} />

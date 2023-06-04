@@ -8,7 +8,7 @@ function RandomProduct() {
   return (
     <div className="flex items-center gap-2 py-4 border-b border-b-gray/[.1]">
       <div>
-        <img className="w-[140px] h-full" src={speaker} alt="Product" />
+        <img className="w-[140px] h-full" src={speaker} alt="StoreProduct" />
       </div>
 
       <div>

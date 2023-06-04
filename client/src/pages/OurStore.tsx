@@ -1,6 +1,6 @@
 import BreadCrumb from "../components/BreadCrumb"
 import { productData } from "../components/productData"
-import Product from "../components/OurStorePage/Product"
+import StoreProduct from "../components/OurStorePage/StoreProduct"
 import TopFilters from "../components/OurStorePage/TopFilters"
 import SideFilters from "../components/OurStorePage/SideFilters"
 import { useState } from "react"
@@ -25,7 +25,7 @@ function OurStore() {
               <TopFilters grid={grid} setGrid={setGrid} />
               <div className={`w-full grid grid-cols-${grid} gap-4 py-4`}>
                 {productData.map((product) => (
-                  <Product
+                  <StoreProduct
                     src={product.image}
                     brand={product.brand}
                     title={product.title}
