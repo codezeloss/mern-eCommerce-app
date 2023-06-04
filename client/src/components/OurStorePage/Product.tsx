@@ -1,13 +1,17 @@
-import productPic from "../../public/images/watch.jpg"
-import heart from "../../public/icons/heart-black.svg"
+import productPic from "../../../public/images/watch.jpg"
+import heart from "../../../public/icons/heart-black.svg"
 import { useState } from "react"
 import Rating from "@mui/material/Rating"
 
-function Product({ src, brand, title, price }: Props) {
+function Product({ src, brand, title, price, grid }: Props) {
   const [value, setValue] = useState(2)
 
   return (
-    <div className="w-full bg-white shadom-sm rounded-md p-4">
+    <div
+      className={`w-full bg-white shadom-sm rounded-md p-4 ${
+        grid === 1 ? "flex items-center gap-4" : ""
+      }`}
+    >
       <div>
         <div className="flex items-center justify-between">
           <div></div>
@@ -18,7 +22,9 @@ function Product({ src, brand, title, price }: Props) {
 
         <div>
           <img
-            className="w-full h-[200px] object-cover"
+            className={`w-full h-[200px] object-cover ${
+              grid === 1 ? "w-[500px] h-[100%]" : ""
+            }`}
             src={src}
             alt="FamousProduct"
           />
@@ -28,6 +34,14 @@ function Product({ src, brand, title, price }: Props) {
       <div>
         <p className="text-red-600 mb-3 text-xs">{brand}</p>
         <h3 className="text-sm font-bold mb-2 leading-5">{title}</h3>
+        {grid === 1 && (
+          <p className="mb-3 text-xs text-gray/[.6]">
+            Apple Watch can do what your other devices can’t because it’s on
+            your wrist. When you wear it, you get a fitness partner that
+            measures all the ways you move, meaningful health insights, and a
+            connection to the people and things you care about most.
+          </p>
+        )}
         <Rating
           sx={{ fontSize: 18, mb: 1.5 }}
           name="simple-controlled"
@@ -49,4 +63,5 @@ interface Props {
   brand: string
   title: string
   price: string
+  grid?: number
 }

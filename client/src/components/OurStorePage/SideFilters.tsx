@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 function SideFilters() {
   return (
-    <div className="w-full">
+    <div className="w-[300px]">
       <div className="bg-white rounded-md shadow-sm p-4 mb-3">
         <h2 className="text-base mb-3">Shop By Categories</h2>
         <div className="flex flex-col items-start text-xs text-gray/[.6] gap-2">
