@@ -22,7 +22,7 @@ a {
 
 @layer components {
     .container {
-        @apply max-w-[1380px] mx-auto px-3;
+        @apply max-w-[1300px] mx-auto px-3;
     }
 
     .primary-btn {
@@ -35,6 +35,6 @@ a {
 
 
     input, textarea {
-        @apply w-full text-sm px-4 py-2 outline-none bg-lightGray
+        @apply w-fit text-sm px-4 py-2 outline-none bg-lightGray
     }
 }

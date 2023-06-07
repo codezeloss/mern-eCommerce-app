@@ -48,7 +48,7 @@ function ReviewForm() {
         <div>
           <label htmlFor="name">Comment</label>
           <textarea
-            className="mt-1"
+            className="mt-1 w-full"
             name="review_body"
             cols={30}
             rows={10}

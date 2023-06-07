@@ -12,11 +12,7 @@ function Blogs() {
 
         <div className="bg-lightGray h-full py-6">
           <div className="container mb-20">
-            <div className="w-full flex gap-4">
-              <div className="min-w-[300px]">
-                <ShopByCategories />
-              </div>
-
+            <div className="w-full">
               <div className="grid grid-cols-2 gap-6">
                 <BlogCard />
                 <BlogCard />

@@ -27,7 +27,7 @@ function ResetPasswordForm() {
 
         <label htmlFor="Email">
           <input
-            className="mb-8"
+            className="mb-8 w-full"
             name="email"
             type="text"
             placeholder="Email"

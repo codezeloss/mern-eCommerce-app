@@ -12,7 +12,7 @@ function LoginForm() {
 
         <label htmlFor="Email">
           <input
-            className="mb-4"
+            className="mb-4 w-full"
             name="email"
             type="text"
             placeholder="Email"
@@ -22,7 +22,7 @@ function LoginForm() {
         </label>
         <label htmlFor="Password">
           <input
-            className="mb-1"
+            className="mb-1 w-full"
             name="password"
             type="password"
             placeholder="Password"
@@ -30,7 +30,7 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <Link to="/forgot-password">
+        <Link to="/account/forgot-password">
           <p className="text-xs font-semibold mb-6">Forgot your password?</p>
         </Link>
 

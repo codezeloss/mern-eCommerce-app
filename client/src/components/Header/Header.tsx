@@ -10,6 +10,7 @@ import user from "/icons/user.svg"
 import cart from "/icons/cart-icon.svg"
 import HeaderOptions from "./HeaderOptions"
 import HeaderCart from "./HeaderCart"
+import { Link } from "react-router-dom"
 
 function Header() {
   return (
@@ -41,7 +42,9 @@ function Header() {
         {/* */}
         <div className="container">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl">@Tecos.</h1>
+            <Link to="/">
+              <h1 className="text-2xl">@Tecos.</h1>
+            </Link>
 
             <div className="w-full max-w-[600px] flex items-center h-6">
               <input

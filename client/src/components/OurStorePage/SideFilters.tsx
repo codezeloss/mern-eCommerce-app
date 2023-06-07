@@ -12,6 +12,7 @@ function SideFilters() {
 
         <div className="mb-6">
           <p className="text-sm font-medium mb-2">Availability</p>
+
           <div className="flex items-center gap-2 mb-2">
             <input className="border-gray/[.6]" type="checkbox" name="" id="" />
             <p className="text-xs text-gray/[.6]">In stock (21)</p>
@@ -48,6 +49,7 @@ function SideFilters() {
 
         <div className="mb-6">
           <p className="text-sm font-medium mb-2">Color</p>
+
           <div className="grid grid-cols-7 gap-2">
             <div className="w-fit p-3 bg-yellow-900 rounded-full"></div>
             <div className="w-fit p-3 bg-yellow-900 rounded-full"></div>
@@ -58,6 +60,7 @@ function SideFilters() {
 
         <div className="mb-6">
           <p className="text-sm font-medium mb-2">Size</p>
+
           <div className="flex items-center gap-2 mb-2">
             <input className="border-gray/[.6]" type="checkbox" name="" id="" />
             <p className="text-xs text-gray/[.6]">S (10)</p>
