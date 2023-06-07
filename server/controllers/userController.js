@@ -403,7 +403,7 @@ const getWishlist = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc   User Cart
+// @desc   User CartPage
 // @route  POST /cart
 // @access Private
 const userCart = asyncHandler(async (req, res) => {
@@ -434,7 +434,7 @@ const userCart = asyncHandler(async (req, res) => {
       products.push(object);
     }
 
-    // Cart TOTAL
+    // CartPage TOTAL
     let cartTotal = 0;
     for (let i = 0; i < products.length; i++) {
       cartTotal = cartTotal + products[i].price * products[i].count;
@@ -452,7 +452,7 @@ const userCart = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc   User Cart
+// @desc   User CartPage
 // @route  GET /cart
 // @access Private
 const getUserCart = asyncHandler(async (req, res) => {
@@ -469,7 +469,7 @@ const getUserCart = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc   Empty Cart
+// @desc   Empty CartPage
 // @route  DELETE /empty-cart
 // @access Private
 const emptyCart = asyncHandler(async (req, res) => {
@@ -638,5 +638,5 @@ module.exports = {
   applyCoupon,
   createOrder,
   getAllOrders,
-  updateOrder
+  updateOrder,
 };

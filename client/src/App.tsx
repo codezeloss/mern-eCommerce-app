@@ -12,6 +12,8 @@ import ForgotPassword from "./pages/ForgotPassword"
 import SignUp from "./pages/SignUp"
 import SingleBlog from "./pages/SingleBlog"
 import SingleProduct from "./pages/SingleProduct"
+import Cart from "./pages/Cart"
+import Checkout from "./pages/Checkout"
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
             />
             <Route path="/account/register" element={<SignUp />} />
             <Route path="/blogs/:id" element={<SingleBlog />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart/checkout" element={<Checkout />} />
             <Route path="/products/:id" element={<SingleProduct />} />
           </Route>
         </Routes>
