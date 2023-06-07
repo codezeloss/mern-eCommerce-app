@@ -1,11 +1,11 @@
-import Product from "../../Product/Product"
-import { productData } from "../../Product/productData"
+import { productData } from "../Product/productData"
+import Product from "../Product/Product"
 
 function PopularProducts() {
   return (
     <>
-      <div className="container mb-20">
-        <h2 className="font-bold text-2xl mb-4">Popular Products</h2>
+      <div className="container px-0">
+        <h2 className="text-lg mt-8 mb-2">Popular Products</h2>
         <div className="grid grid-cols-5 gap-2">
           {productData.map((product) => (
             <Product

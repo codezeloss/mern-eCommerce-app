@@ -1,7 +1,8 @@
-import productPic from "../../public/images/watch.jpg"
-import heart from "../../public/icons/heart-black.svg"
+import productPic from "../../../public/images/watch.jpg"
+import heart from "../../../public/icons/heart-black.svg"
 import { useState } from "react"
 import Rating from "@mui/material/Rating"
+import { Link } from "react-router-dom"
 
 function Product({ src, brand, title, price }: Props) {
   const [value, setValue] = useState(2)
@@ -27,7 +28,11 @@ function Product({ src, brand, title, price }: Props) {
 
       <div>
         <p className="text-red-600 mb-3 text-xs">{brand}</p>
-        <h3 className="text-sm font-bold mb-2 leading-5">{title}</h3>
+        <Link to="/products/:id">
+          <h3 className="text-sm font-bold mb-2 leading-5 hover:underline">
+            {title}
+          </h3>
+        </Link>
         <Rating
           sx={{ fontSize: 18, mb: 1.5 }}
           name="simple-controlled"

@@ -1,5 +1,5 @@
-import Product from "../../Product"
-import { productData } from "../../productData"
+import Product from "../../Product/Product"
+import { productData } from "../../Product/productData"
 
 function FeaturedProducts() {
   return (

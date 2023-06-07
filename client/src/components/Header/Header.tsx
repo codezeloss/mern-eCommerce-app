@@ -3,11 +3,11 @@ import HeaderLinks from "./HeaderLinks"
 
 // ** Icons
 import ChevronDown from "../../../public/icons/ChevronDown"
-import searchGlass from "../../../public/icons/search-glass.svg"
-import arrowPath from "../../../public/icons/arrow-path.svg"
-import heart from "../../../public/icons/heart.svg"
-import user from "../../../public/icons/user.svg"
-import cart from "../../../public/icons/cart-icon.svg"
+import searchGlass from "/icons/search-glass.svg"
+import arrowPath from "/icons/arrow-path.svg"
+import heart from "/icons/heart.svg"
+import user from "/icons/user.svg"
+import cart from "/icons/cart-icon.svg"
 import HeaderOptions from "./HeaderOptions"
 import HeaderCart from "./HeaderCart"
 

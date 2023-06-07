@@ -5,6 +5,13 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import OurStore from "./pages/OurStore"
 import Blogs from "./pages/Blogs"
+import CompareProducts from "./pages/CompareProducts"
+import Wishlist from "./pages/Wishlist"
+import Login from "./pages/Login"
+import ForgotPassword from "./pages/ForgotPassword"
+import SignUp from "./pages/SignUp"
+import SingleBlog from "./pages/SingleBlog"
+import SingleProduct from "./pages/SingleProduct"
 
 function App() {
   return (
@@ -17,6 +24,16 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/store" element={<OurStore />} />
             <Route path="/blogs" element={<Blogs />} />
+            <Route path="/compare-products" element={<CompareProducts />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/account" element={<Login />} />
+            <Route
+              path="/account/forgot-password"
+              element={<ForgotPassword />}
+            />
+            <Route path="/account/register" element={<SignUp />} />
+            <Route path="/blogs/:id" element={<SingleBlog />} />
+            <Route path="/products/:id" element={<SingleProduct />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -22,7 +22,7 @@ function ContactForm() {
       <form className="flex flex-col gap-4" onSubmit={onSubmitForm}>
         <label htmlFor="name">
           <input
-            className="w-full text-sm px-4 py-2 outline-none bg-lightGray"
+            className=""
             type="text"
             name="name"
             placeholder="Name"
@@ -32,7 +32,7 @@ function ContactForm() {
         </label>
         <label htmlFor="email">
           <input
-            className="w-full text-sm px-4 py-2 outline-none bg-lightGray"
+            className=""
             type="text"
             name="email"
             placeholder="Email"
@@ -42,7 +42,7 @@ function ContactForm() {
         </label>
         <label htmlFor="phone">
           <input
-            className="w-full text-sm px-4 py-2 outline-none bg-lightGray"
+            className=""
             type="text"
             name="phone"
             placeholder="Phone Number"

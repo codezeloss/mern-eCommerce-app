@@ -1,5 +1,5 @@
 import ShopByCategories from "../components/ShopByCategories"
-import BlogCard from "../components/BlogPage/BlogCard"
+import BlogCard from "../components/BlogsPage/BlogCard"
 import BreadCrumb from "../components/BreadCrumb"
 
 function Blogs() {

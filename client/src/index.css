@@ -28,4 +28,13 @@ a {
     .primary-btn {
         @apply block w-fit text-white uppercase rounded-full px-5 py-2 bg-secondary text-xs;
     }
+
+    .secondary-btn {
+        @apply block w-fit text-primary uppercase rounded-full px-5 py-2 bg-custom-orange text-xs;
+    }
+
+
+    input, textarea {
+        @apply w-full text-sm px-4 py-2 outline-none bg-lightGray
+    }
 }

@@ -1,5 +1,5 @@
-import ProductTag from "../ProductTag"
-import RandomProduct from "../RandomProduct"
+import ProductTag from "../Product/ProductTag"
+import RandomProduct from "../Product/RandomProduct"
 import ShopByCategories from "../ShopByCategories"
 
 function SideFilters() {

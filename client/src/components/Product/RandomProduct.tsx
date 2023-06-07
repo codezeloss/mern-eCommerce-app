@@ -1,4 +1,4 @@
-import speaker from "../../public/images/speaker.jpg"
+import speaker from "../../../public/images/speaker.jpg"
 import { useState } from "react"
 import Rating from "@mui/material/Rating"
 

@@ -1,5 +1,5 @@
 import BreadCrumb from "../components/BreadCrumb"
-import { productData } from "../components/productData"
+import { productData } from "../components/Product/productData"
 import StoreProduct from "../components/OurStorePage/StoreProduct"
 import TopFilters from "../components/OurStorePage/TopFilters"
 import SideFilters from "../components/OurStorePage/SideFilters"

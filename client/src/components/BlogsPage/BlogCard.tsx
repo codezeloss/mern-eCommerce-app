@@ -1,4 +1,5 @@
-import blogImg from "../../../public/images/blog-1.jpg"
+import blogImg from "/images/blog-1.jpg"
+import { Link } from "react-router-dom"
 
 function BlogCard() {
   return (
@@ -16,9 +17,9 @@ function BlogCard() {
           You're only as good as your last collection, which is an enormous
           pressure. I think there is something about luxury...
         </p>
-        <button className="primary-btn" type="button">
+        <Link to="/blogs/single-blog" className="primary-btn">
           Read More
-        </button>
+        </Link>
       </div>
     </div>
   )
