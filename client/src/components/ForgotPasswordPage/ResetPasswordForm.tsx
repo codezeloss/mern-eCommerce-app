@@ -2,13 +2,15 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 
 function ResetPasswordForm() {
-  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmedPassword, setConfirmedPassword] = useState("")
 
   // **
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    setEmail("")
+    setPassword("")
+    setConfirmedPassword("")
   }
 
   return (
@@ -17,34 +19,35 @@ function ResetPasswordForm() {
         className="bg-white px-6 py-10 rounded-md shadow-sm w-[450px] mx-auto"
         onSubmit={onSubmitForm}
       >
-        <h2 className="mb-2 text-center text-xl font-bold">
+        <h2 className="mb-6 text-center text-xl font-bold">
           Reset Your Password
         </h2>
 
-        <p className="text-center text-xs text-gray/[.6] mb-4">
-          We will send you an email to reset your password
-        </p>
-
-        <label htmlFor="Email">
+        <label htmlFor="Password">
           <input
-            className="mb-8 w-full"
+            className="mb-3 w-full"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <label htmlFor="Confirm Password">
+          <input
+            className="mb-6 w-full"
             name="email"
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmedPassword}
+            onChange={(e) => setConfirmedPassword(e.target.value)}
           />
         </label>
 
-        <div className="flex flex-col items-center justify-center gap-2">
-          <button type="submit" className="primary-btn">
-            Submit
+        <div className="flex justify-center">
+          <button type="submit" className="primary-btn text-center">
+            Ok
           </button>
-          <Link to="/account">
-            <p className="block w-fit text-white uppercase rounded-full px-4 pt-2 text-primary text-xs">
-              Cancel
-            </p>
-          </Link>
         </div>
       </form>
     </div>

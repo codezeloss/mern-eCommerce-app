@@ -14,6 +14,7 @@ import SingleBlog from "./pages/SingleBlog"
 import SingleProduct from "./pages/SingleProduct"
 import Cart from "./pages/Cart"
 import Checkout from "./pages/Checkout"
+import ResetPassword from "./pages/ResetPassword"
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               path="/account/forgot-password"
               element={<ForgotPassword />}
             />
+            <Route path="/account/reset-password" element={<ResetPassword />} />
             <Route path="/account/register" element={<SignUp />} />
             <Route path="/blogs/:id" element={<SingleBlog />} />
             <Route path="/cart" element={<Cart />} />
