@@ -38,7 +38,9 @@ function App() {
             <Route path="/account/register" element={<SignUp />} />
             <Route path="/blogs/:id" element={<SingleBlog />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/cart/checkout" element={<Checkout />} />
+            <Route path="/cart/checkout/information" element={<Checkout />} />
+            <Route path="/cart/checkout/shipping" element={<Checkout />} />
+            <Route path="/cart/checkout/payment" element={<Checkout />} />
             <Route path="/products/:id" element={<SingleProduct />} />
           </Route>
         </Routes>

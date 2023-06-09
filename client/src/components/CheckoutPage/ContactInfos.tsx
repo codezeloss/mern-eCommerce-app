@@ -4,12 +4,14 @@ import Autocomplete from "@mui/material/Autocomplete"
 import infoIcon from "/icons/info-icon.svg"
 import PaymentInfos from "./PaymentInfos"
 import CheckoutPagination from "./CheckoutPagination"
+import { Link } from "react-router-dom"
+import arrowLeft from "/icons/arrow-left.svg"
 
 function ContactInfos() {
   return (
     <div className="text-xs text-gray/[.6]">
       <div>
-        <h2 className="text-lg mb-4 text-primary">Contact information</h2>
+        <h2 className="text-lg mb-4 mt-6 text-primary">Contact information</h2>
         <div className="flex flex-col gap-2 mb-6">
           <p>Navdeep Dahiya (momo1223@gmail.com)</p>
           <button className="block w-fit">Log out</button>
@@ -124,7 +126,23 @@ function ContactInfos() {
         </Box>
       </div>
 
-      <CheckoutPagination />
+      <div className="flex items-center justify-between my-4">
+        <Link to={`/cart`} className="flex items-center gap-2">
+          <img
+            className="w-4 h-4"
+            src={arrowLeft}
+            alt="Return to information"
+          />
+          <p className="text-sm text-gray/[.8]">Return to Cart</p>
+        </Link>
+
+        <Link
+          to="/cart/checkout/shipping"
+          className="p-4 text-white bg-red-600 rounded-md text-sm"
+        >
+          Continue to shipping
+        </Link>
+      </div>
     </div>
   )
 }

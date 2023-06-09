@@ -1,9 +1,15 @@
 import arrowLeft from "/icons/arrow-left.svg"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import PaymentInfos from "./PaymentInfos"
 import CheckoutPagination from "./CheckoutPagination"
+import { useState } from "react"
 
 function ShippingInfos() {
+  const [payment, setPayment] = useState(false)
+  const { pathname } = useLocation()
+
+  let path = pathname
+
   return (
     <div>
       <div className="border-[1px] border-gray/[.1] rounded-md px-4 pt-4 text-sm text-gray/[.8] my-8">
@@ -17,8 +23,8 @@ function ShippingInfos() {
           <p>test@gmail.com</p>
           <button className="text-xs hover:underline">Change</button>
         </div>
-        {false && (
-          <div className="flex items-center justify-between pt-4 border-t-[1px] border-t-gray/[.1]">
+        {payment && (
+          <div className="flex items-center justify-between py-4 border-t-[1px] border-t-gray/[.1]">
             <p>Method</p>
             <p>
               Standard - <span className="font-bold text-primary">$19.65</span>
@@ -44,9 +50,32 @@ function ShippingInfos() {
         </div>
       </div>
 
-      <CheckoutPagination />
+      {!payment && (
+        <div className="flex items-center justify-between my-4">
+          <Link
+            to="/cart/checkout/information"
+            className="flex items-center gap-2"
+          >
+            <img
+              className="w-4 h-4"
+              src={arrowLeft}
+              alt="Return to information"
+            />
+            <p className="text-sm text-gray/[.8]">Return to information</p>
+          </Link>
 
-      {false && <PaymentInfos />}
+          <button
+            className="p-4 text-white bg-red-600 rounded-md text-sm"
+            onClick={() => {
+              setPayment(!payment)
+            }}
+          >
+            Continue to payment
+          </button>
+        </div>
+      )}
+
+      {payment && <PaymentInfos />}
     </div>
   )
 }

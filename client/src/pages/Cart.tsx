@@ -56,7 +56,7 @@ function Cart() {
                   <p>Taxes and shipping calculated at checkout</p>
                 </div>
                 <Link
-                  to="/cart/checkout"
+                  to="/cart/checkout/information"
                   className="w-full primary-btn py-3 mt-4 normal-case text-xs text-center"
                 >
                   Check Out
