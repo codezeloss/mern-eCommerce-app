@@ -1,11 +1,11 @@
+import { Link } from "react-router-dom"
+
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
-import infoIcon from "/icons/info-icon.svg"
-import PaymentInfos from "./PaymentInfos"
-import CheckoutPagination from "./CheckoutPagination"
-import { Link } from "react-router-dom"
-import arrowLeft from "/icons/arrow-left.svg"
+
+import infoIcon from "../../../public/icons/info-icon.svg"
+import arrowLeft from "../../../public/icons/arrow-left.svg"
 
 function ContactInfos() {
   return (

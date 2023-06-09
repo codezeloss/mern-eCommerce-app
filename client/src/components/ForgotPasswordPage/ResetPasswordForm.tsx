@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom"
 import { useState } from "react"
 
 function ResetPasswordForm() {
   const [password, setPassword] = useState("")
   const [confirmedPassword, setConfirmedPassword] = useState("")
 
-  // **
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 

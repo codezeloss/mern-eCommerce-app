@@ -1,5 +1,5 @@
-import speakerImg from "/images/speaker.jpg"
-import trashIcon from "/icons/trash-icon.svg"
+import speakerImg from "../../../public/images/speaker.jpg"
+import trashIcon from "../../../public/icons/trash-icon.svg"
 
 function ProductCart() {
   return (

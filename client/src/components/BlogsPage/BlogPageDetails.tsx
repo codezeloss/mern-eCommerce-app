@@ -1,10 +1,12 @@
-import blogImg from "/images/blog-1.jpg"
 import { Link } from "react-router-dom"
-import arrowLeft from "/icons/arrow-left.svg"
+import PostComment from "./PostComment"
+
+import blogImg from "../../../public/images/blog-1.jpg"
+import arrowLeft from "../../../public/icons/arrow-left.svg"
+
 import FacebookIcon from "@mui/icons-material/Facebook"
 import TwitterIcon from "@mui/icons-material/Twitter"
 import PinterestIcon from "@mui/icons-material/Pinterest"
-import PostComment from "./PostComment"
 
 function BlogPageDetails() {
   return (

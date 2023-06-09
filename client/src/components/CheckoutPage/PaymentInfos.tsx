@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom"
+
 import TextField from "@mui/material/TextField"
 import Box from "@mui/material/Box"
-import infoIcon from "/icons/info-icon.svg"
-import arrowLeft from "/icons/arrow-left.svg"
-import { Link } from "react-router-dom"
-import CheckoutPagination from "./CheckoutPagination"
+
+import infoIcon from "../../../public/icons/info-icon.svg"
+import arrowLeft from "../../../public/icons/arrow-left.svg"
 
 function PaymentInfos() {
   return (

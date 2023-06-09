@@ -1,4 +1,4 @@
-import newsletter from "/icons/newspaper-icon.svg"
+import newsletter from "../../../public/icons/newspaper-icon.svg"
 
 function FooterNewsletter() {
   return (

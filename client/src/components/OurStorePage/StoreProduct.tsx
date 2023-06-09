@@ -1,8 +1,8 @@
-import productPic from "../../../public/images/watch.jpg"
-import heart from "../../../public/icons/heart-black.svg"
-import { useState } from "react"
-import Rating from "@mui/material/Rating"
 import { Link } from "react-router-dom"
+import { useState } from "react"
+
+import heart from "../../../public/icons/heart-black.svg"
+import Rating from "@mui/material/Rating"
 
 function StoreProduct({ src, brand, title, price, grid }: Props) {
   const [value, setValue] = useState(2)

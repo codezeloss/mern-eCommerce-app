@@ -1,5 +1,5 @@
-import Rating from "@mui/material/Rating"
 import { useState } from "react"
+import Rating from "@mui/material/Rating"
 
 function UserReview() {
   const [value, setValue] = useState(2)

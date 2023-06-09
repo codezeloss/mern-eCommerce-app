@@ -1,17 +1,16 @@
 /*import { Helmet } from "react-helmet"*/
+interface Props {
+  title: string
+}
 
 function Meta({ title }: Props) {
   return (
     <div>
       <meta charSet="utf-8" />
       <title>{title}</title>
-      <link rel="canonical" href="http://mysite.com/example" />
+      <link rel="canonical" href="" />
     </div>
   )
 }
 
 export default Meta
-
-interface Props {
-  title: string
-}

@@ -1,7 +1,7 @@
-import gridIcon01 from "../../../public/images/gr.svg"
-import gridIcon02 from "../../../public/images/gr2.svg"
-import gridIcon03 from "../../../public/images/gr3.svg"
-import gridIcon04 from "../../../public/images/gr4.svg"
+import gridIcon01 from "../../../public/icons/gr.svg"
+import gridIcon02 from "../../../public/icons/gr2.svg"
+import gridIcon03 from "../../../public/icons/gr3.svg"
+import gridIcon04 from "../../../public/icons/gr4.svg"
 
 interface Props {
   grid: number

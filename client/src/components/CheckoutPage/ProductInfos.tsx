@@ -1,4 +1,4 @@
-import speaker from "/images/speaker.jpg"
+import speaker from "../../../public/images/speaker.jpg"
 
 function ProductInfos() {
   return (

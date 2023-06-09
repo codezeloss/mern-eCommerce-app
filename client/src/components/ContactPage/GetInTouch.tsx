@@ -1,7 +1,7 @@
-import homeIcon from "/icons/home-icon.svg"
-import phoneIcon from "/icons/phone-icon.svg"
-import mailIcon from "/icons/mail-icon.svg"
-import infoIcon from "/icons/info-icon.svg"
+import homeIcon from "../../../public/icons/home-icon.svg"
+import phoneIcon from "../../../public/icons/phone-icon.svg"
+import mailIcon from "../../../public/icons/mail-icon.svg"
+import infoIcon from "../../../public/icons/info-icon.svg"
 
 function GetInTouch() {
   return (
