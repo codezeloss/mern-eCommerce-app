@@ -1,4 +1,4 @@
-import bannerPic01 from "../../../../public/images/catbanner-01.jpg"
+import bannerPic01 from "../../../assets/images/catbanner-01.jpg"
 
 function Banner({
   subtitle,

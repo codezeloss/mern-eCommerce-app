@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
-import heart from "../../../public/icons/heart-black.svg"
+import heart from "../../assets/icons/heart-black.svg"
 import Rating from "@mui/material/Rating"
 
 function StoreProduct({ src, brand, title, price, grid }: Props) {

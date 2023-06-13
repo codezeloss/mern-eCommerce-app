@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import categories from "../../../public/icons/categories-icon.svg"
-import chevronDown from "../../../public/icons/chevron-down.svg"
+import categories from "../../assets/icons/categories-icon.svg"
+import chevronDown from "../../assets/icons/chevron-down.svg"
 
 function HeaderOptions() {
   return (

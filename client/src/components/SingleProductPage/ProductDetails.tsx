@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Rating from "@mui/material/Rating"
-import heartIcon from "../../../public/icons/heart-black.svg"
-import compareIcon from "../../../public/icons/arrow-right-left.svg"
+import heartIcon from "../../assets/icons/heart-black.svg"
+import compareIcon from "../../assets/icons/arrow-right-left.svg"
 
 function ProductDetails() {
   const [value, setValue] = useState(2)

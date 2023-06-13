@@ -4,8 +4,8 @@ import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 
-import infoIcon from "../../../public/icons/info-icon.svg"
-import arrowLeft from "../../../public/icons/arrow-left.svg"
+import infoIcon from "../../assets/icons/info-icon.svg"
+import arrowLeft from "../../assets/icons/arrow-left.svg"
 
 function ContactInfos() {
   return (

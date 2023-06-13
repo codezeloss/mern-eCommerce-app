@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import TextField from "@mui/material/TextField"
 import Box from "@mui/material/Box"
 
-import infoIcon from "../../../public/icons/info-icon.svg"
-import arrowLeft from "../../../public/icons/arrow-left.svg"
+import infoIcon from "../../assets/icons/info-icon.svg"
+import arrowLeft from "../../assets/icons/arrow-left.svg"
 
 function PaymentInfos() {
   return (

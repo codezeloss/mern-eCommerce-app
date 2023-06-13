@@ -1,5 +1,5 @@
-import tabletImg from "../../../public/images/tab.jpg"
-import xMark from "../../../public/icons/x-mark.svg"
+import tabletImg from "../../assets/images/tab.jpg"
+import xMark from "../../assets/icons/x-mark.svg"
 
 function ComparedProduct() {
   return (

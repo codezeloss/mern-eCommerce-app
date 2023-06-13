@@ -1,6 +1,6 @@
-import pic from "../../../../public/images/tab1.jpg"
+import pic from "../../../assets/images/tab1.jpg"
 import { useState } from "react"
-import heart from "../../../../public/icons/heart-black.svg"
+import heart from "../../../assets/icons/heart-black.svg"
 
 // ** MUI Imports
 import { styled } from "@mui/material/styles"

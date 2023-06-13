@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import PostComment from "./PostComment"
 
-import blogImg from "../../../public/images/blog-1.jpg"
-import arrowLeft from "../../../public/icons/arrow-left.svg"
+import blogImg from "../../assets/images/blog-1.jpg"
+import arrowLeft from "../../assets/icons/arrow-left.svg"
 
 import FacebookIcon from "@mui/icons-material/Facebook"
 import TwitterIcon from "@mui/icons-material/Twitter"

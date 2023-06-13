@@ -1,4 +1,4 @@
-import speakerImg from "../../../public/images/watch.jpg"
+import speakerImg from "../../assets/images/watch.jpg"
 
 function ProductImages() {
   return (
