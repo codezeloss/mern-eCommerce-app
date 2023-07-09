@@ -352,7 +352,7 @@ const forgotPasswordToken = asyncHandler(async (req, res) => {
   try {
     const token = await user.createPasswordResetToken();
     await user.save();
-    const resetURL = `Hi! Please follow this link to reset your password. This link is valid till 10 mins from now. <a href='http://localhost:4000/api/user/reset-password/${token}'>Click here</a>`;
+    const resetURL = `Hi! Please follow this link to reset your password. This link is valid till 10 mins from now. <a href="http://localhost:4000/api/user/reset-password/${token}">Click here</a>`;
     const data = {
       to: email,
       text: "Hey user!",
@@ -420,7 +420,7 @@ const userCart = asyncHandler(async (req, res) => {
     // check if user already have product in cart
     const alreadyExistCart = await Cart.findOne({ orderBy: user._id });
     if (alreadyExistCart) {
-      alreadyExistCart.remove();
+      await Cart.findOneAndRemove({ orderBy: user._id });
     }
 
     // FamousProduct Object (--To be pushed to products Array)
@@ -577,14 +577,30 @@ const createOrder = asyncHandler(async (req, res) => {
 // @route  GET /all-orders
 // @access Private
 const getAllOrders = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
-  validateMongodbId(_id);
-
   try {
-    const orders = await Order.findOne({ orderBy: _id })
+    const orders = await Order.find()
       .populate("products.product")
+      .populate("orderBy")
       .exec();
     res.json(orders);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc   Get Order By User ID
+// @route  POST /orders-by-user
+// @access Private
+const getOrderByUserId = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  validateMongodbId(id);
+
+  try {
+    const userOrders = await Order.findOne({ orderBy: id })
+      .populate("products.product")
+      .populate("orderBy")
+      .exec();
+    res.json(userOrders);
   } catch (error) {
     throw new Error(error);
   }
@@ -638,5 +654,6 @@ module.exports = {
   applyCoupon,
   createOrder,
   getAllOrders,
+  getOrderByUserId,
   updateOrder,
 };

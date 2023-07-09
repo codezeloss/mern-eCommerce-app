@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import blogImg from "../../assets/images/blog-1.jpg"
+import blogImg from "../../../public/assets/images/blog-1.jpg"
 
 function BlogCard() {
   return (

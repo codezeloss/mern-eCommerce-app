@@ -1,11 +1,9 @@
-import bannerPic01 from "../../../assets/images/catbanner-01.jpg"
-
 function Banner({
   subtitle,
   title,
   price_desc,
   duration_desc,
-  img_src = bannerPic01,
+  img_src,
 }: Props) {
   return (
     <div className="">

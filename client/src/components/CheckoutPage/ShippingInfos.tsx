@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import PaymentInfos from "./PaymentInfos"
 
-import arrowLeft from "../../assets/icons/arrow-left.svg"
+import arrowLeft from "../../../public/assets/icons/arrow-left.svg"
 
 function ShippingInfos() {
   const [payment, setPayment] = useState(false)

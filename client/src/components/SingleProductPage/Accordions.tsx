@@ -3,7 +3,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping"
 import AutoAwesomeMosaicIcon from "@mui/icons-material/AutoAwesomeMosaic"
 import BorderStyleIcon from "@mui/icons-material/BorderStyle"
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
-import shareIcon from "../../assets/icons/share-icon.svg"
+import shareIcon from "../../../public/assets/icons/share-icon.svg"
 
 function Accordions() {
   return (

@@ -1,4 +1,4 @@
-import picture from "../../../assets/images/blog-1.jpg"
+import picture from "../../../../public/assets/images/blog-1.jpg"
 
 function BlogCard() {
   return (

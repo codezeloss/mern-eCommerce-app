@@ -1,5 +1,5 @@
 import { useState } from "react"
-import speaker from "../../assets/images/speaker.jpg"
+import speaker from "../../../public/assets/images/speaker.jpg"
 import Rating from "@mui/material/Rating"
 
 function RandomProduct() {
