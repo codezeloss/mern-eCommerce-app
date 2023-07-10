@@ -7,7 +7,9 @@ function Marquees() {
     <div className="container bg-white rounded-md shadow-sm mb-20">
       <Marquee>
         {data.map((brand) => (
-          <Brand src={brand.icon} />
+          <div key={brand.key}>
+            <Brand src={brand.icon} />
+          </div>
         ))}
       </Marquee>
     </div>

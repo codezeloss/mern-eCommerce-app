@@ -70,7 +70,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
     }
 
     const products = await query;
-    // const products = await FamousProduct.find(queryObj)
+    // const product = await FamousProduct.find(queryObj)
 
     res.json(products);
   } catch (error) {

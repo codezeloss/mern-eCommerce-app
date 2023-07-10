@@ -1,30 +1,55 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
-
 import heart from "../../../public/assets/icons/heart-black.svg"
 import Rating from "@mui/material/Rating"
+import { addProductToWishList } from "../../features/product/productSlice"
+import { useDispatch } from "react-redux"
 
-function StoreProduct({ src, brand, title, price, grid }: Props) {
-  const [value, setValue] = useState(2)
+interface Props {
+  id: string
+  src: any
+  description: string
+  rating: number
+  brand: string
+  title: string
+  price: string
+  grid?: number
+}
+
+function StoreProduct({
+  id,
+  src,
+  description,
+  rating,
+  brand,
+  title,
+  price,
+  grid,
+}: Props) {
+  const dispatch = useDispatch()
+
+  const addToWishlist = () => {
+    // @ts-ignore
+    dispatch(addProductToWishList(id))
+  }
 
   return (
     <div
-      className={`w-full bg-white shadow-sm rounded-md p-4 ${
-        grid === 1 ? "flex items-center gap-4" : ""
+      className={`w-full bg-white shadow-sm rounded-md  ${
+        grid === 1 ? "flex items-center gap-4 p-4" : "px-4 pb-6 pt-2.5"
       }`}
     >
-      <div>
+      <div className={`${grid === 1 ? "w-[250px]" : ""}`}>
         <div className="flex items-center justify-between">
-          <div></div>
-          <button type="button">
+          <div />
+          <button type="button" onClick={addToWishlist}>
             <img className="w-4 h-4 text-black" src={heart} alt="Like" />
           </button>
         </div>
 
         <div>
           <img
-            className={`w-full h-[200px] object-cover ${
-              grid === 1 ? "w-[500px] h-[100%]" : ""
+            className={`w-full h-[250px] object-cover text-sm ${
+              grid === 1 ? "w-[250px] h-[100%]" : ""
             }`}
             src={src}
             alt="FamousProduct"
@@ -40,21 +65,19 @@ function StoreProduct({ src, brand, title, price, grid }: Props) {
           </h3>
         </Link>
         {grid === 1 && (
-          <p className="mb-3 text-xs text-gray/[.6]">
-            Apple Watch can do what your other devices can’t because it’s on
-            your wrist. When you wear it, you get a fitness partner that
-            measures all the ways you move, meaningful health insights, and a
-            connection to the people and things you care about most.
-          </p>
+          <p
+            className="mb-3 text-xs text-gray/[.6]"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         )}
-        <Rating
-          sx={{ fontSize: 18, mb: 1.5 }}
-          name="simple-controlled"
-          value={value}
-          onChange={(e: any) => {
-            setValue(e.target.value)
-          }}
-        />
+        <div>
+          <Rating
+            sx={{ fontSize: 18, mb: 1.5 }}
+            name="simple-controlled"
+            value={rating}
+            readOnly
+          />
+        </div>
         <p className="text-sm font-medium">${price}</p>
       </div>
     </div>
@@ -62,11 +85,3 @@ function StoreProduct({ src, brand, title, price, grid }: Props) {
 }
 
 export default StoreProduct
-
-interface Props {
-  src: any
-  brand: string
-  title: string
-  price: string
-  grid?: number
-}

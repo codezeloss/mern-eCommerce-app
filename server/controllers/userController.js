@@ -423,7 +423,7 @@ const userCart = asyncHandler(async (req, res) => {
       await Cart.findOneAndRemove({ orderBy: user._id });
     }
 
-    // FamousProduct Object (--To be pushed to products Array)
+    // FamousProduct Object (--To be pushed to product Array)
     for (let i = 0; i < cart.length; i++) {
       let object = {};
       object.product = cart[i]._id;
@@ -461,7 +461,7 @@ const getUserCart = asyncHandler(async (req, res) => {
 
   try {
     const cart = await Cart.findOne({ orderBy: _id }).populate(
-      "products.product"
+      "product.product"
     );
     res.json(cart);
   } catch (error) {
@@ -501,7 +501,7 @@ const applyCoupon = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ _id });
   let { cartTotal } = await Cart.findOne({ orderBy: user._id }).populate(
-    "products.product"
+    "product.product"
   );
 
   // Calculate the TOTAL after Discount
@@ -579,7 +579,7 @@ const createOrder = asyncHandler(async (req, res) => {
 const getAllOrders = asyncHandler(async (req, res) => {
   try {
     const orders = await Order.find()
-      .populate("products.product")
+      .populate("product.product")
       .populate("orderBy")
       .exec();
     res.json(orders);
@@ -597,7 +597,7 @@ const getOrderByUserId = asyncHandler(async (req, res) => {
 
   try {
     const userOrders = await Order.findOne({ orderBy: id })
-      .populate("products.product")
+      .populate("product.product")
       .populate("orderBy")
       .exec();
     res.json(userOrders);

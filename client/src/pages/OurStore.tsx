@@ -3,10 +3,31 @@ import { productData } from "../components/Product/productData"
 import StoreProduct from "../components/OurStorePage/StoreProduct"
 import TopFilters from "../components/OurStorePage/TopFilters"
 import SideFilters from "../components/OurStorePage/SideFilters"
-import { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllProducts } from "../features/product/productSlice"
+
+interface Props {
+  _id: string
+  images: any
+  description: string
+  totalRating: number
+  brand: string
+  title: string
+  price: string
+}
 
 function OurStore() {
   const [grid, setGrid] = useState(4)
+  const dispatch = useDispatch()
+
+  const productState = useSelector((state: any) => state.product)
+  const { isError, isLoading, isSuccess, products } = productState
+
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(getAllProducts())
+  }, [])
 
   return (
     <>
@@ -24,15 +45,23 @@ function OurStore() {
             <div className="w-full mb-20">
               <TopFilters grid={grid} setGrid={setGrid} />
               <div className={`w-full grid grid-cols-${grid} gap-4 py-4`}>
-                {productData.map((product) => (
-                  <StoreProduct
-                    src={product.image}
-                    brand={product.brand}
-                    title={product.title}
-                    price={product.price}
-                    grid={grid}
-                  />
-                ))}
+                {products &&
+                  products.map(
+                    (product: Props, index: React.Key | null | undefined) => (
+                      <div key={index}>
+                        <StoreProduct
+                          id={product._id}
+                          src={product.images[0]?.url}
+                          description={product.description}
+                          rating={product.totalRating}
+                          brand={product.brand}
+                          title={product.title}
+                          price={product.price}
+                          grid={grid}
+                        />
+                      </div>
+                    ),
+                  )}
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { registerUser } from "../../features/user/userSlice"
 import { toast } from "react-toastify"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 // ** yup Validation
 let signupSchema = object({
@@ -16,6 +17,7 @@ let signupSchema = object({
 
 function RegisterForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   // RTK
   const userState = useSelector((state: any) => state.auth)
@@ -41,6 +43,7 @@ function RegisterForm() {
   useEffect(() => {
     if (isSuccess && createdUser) {
       toast.success("User created successfully!", {})
+      navigate("/account")
     }
     if (isError) {
       toast.error("Something went wrong!!", {})

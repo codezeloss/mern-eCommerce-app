@@ -14,11 +14,21 @@ function SideFilters() {
           <p className="text-sm font-medium mb-2">Availability</p>
 
           <div className="flex items-center gap-2 mb-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">In stock (21)</p>
           </div>
           <div className="flex items-center gap-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">Out of stock (21)</p>
           </div>
         </div>
@@ -29,7 +39,7 @@ function SideFilters() {
             <div className="flex items-center gap-1">
               <p className="text-sm text-gray/[.6]">$</p>
               <input
-                className="border border-0 bg-gray/[.1] text-xs p-2 w-full outline-none"
+                className="border-0 bg-gray/[.1] text-xs p-2 w-full outline-none"
                 type="text"
                 name="from-price"
                 placeholder="From"
@@ -38,7 +48,7 @@ function SideFilters() {
             <div className="flex items-center gap-1">
               <p className="text-sm text-gray/[.6]">$</p>
               <input
-                className="border border-0 bg-gray/[.1] text-xs p-2 w-full outline-none"
+                className="border-0 bg-gray/[.1] text-xs p-2 w-full outline-none"
                 type="text"
                 name="price-to"
                 placeholder="To"
@@ -58,31 +68,61 @@ function SideFilters() {
           </div>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 w-fit">
           <p className="text-sm font-medium mb-2">Size</p>
 
           <div className="flex items-center gap-2 mb-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">S (10)</p>
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">M (10)</p>
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">L (10)</p>
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">XL (10)</p>
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">XXL (10)</p>
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <input className="border-gray/[.6]" type="checkbox" name="" id="" />
+            <input
+              className="border-gray/[.6] w-fit"
+              type="checkbox"
+              name=""
+              id=""
+            />
             <p className="text-xs text-gray/[.6]">XXXL (10)</p>
           </div>
         </div>

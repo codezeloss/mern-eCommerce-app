@@ -9,8 +9,14 @@ export interface State {
   message: string | any
 }
 
+// Get user from LocalStorage
+// @ts-ignore
+const getCustomerFromLocalStorage = localStorage.getItem("customer")
+  ? JSON.parse(localStorage.getItem("customer"))
+  : null
+
 const initialState: State = {
-  user: "",
+  user: getCustomerFromLocalStorage,
   isError: false,
   isSuccess: false,
   isLoading: false,

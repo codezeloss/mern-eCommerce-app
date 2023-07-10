@@ -42,7 +42,12 @@ const ProductSchema = new Schema(
         url: String,
       },
     ],
-    color: [],
+    color: [
+      {
+        _id: String,
+        color: String,
+      },
+    ],
     tags: String,
     ratings: [
       {
@@ -52,7 +57,7 @@ const ProductSchema = new Schema(
       },
     ],
     totalRating: {
-      type: String,
+      type: Number,
       default: 0,
     },
   },

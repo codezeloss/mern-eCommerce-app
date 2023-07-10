@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useFormik } from "formik"
@@ -14,6 +14,7 @@ let signupSchema = object({
 
 function LoginForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   // RTK
   const userState = useSelector((state: any) => state.auth)
@@ -36,6 +37,7 @@ function LoginForm() {
   useEffect(() => {
     if (isSuccess && user) {
       toast.success("Login successfully!", {})
+      navigate("/")
     }
     if (isError) {
       toast.error("Something went wrong!!", {})
