@@ -26,15 +26,19 @@ a {
     }
 
     .primary-btn {
-        @apply block w-fit text-white uppercase rounded-full px-5 py-2 bg-secondary text-xs;
+        @apply block w-fit text-white uppercase rounded-full px-5 py-2 bg-secondary hover:bg-secondary/60 text-xs;
     }
 
     .secondary-btn {
-        @apply block w-fit text-primary uppercase rounded-full px-5 py-2 bg-custom-orange text-xs;
+        @apply block w-fit text-primary uppercase rounded-full px-5 py-2 bg-custom-orange hover:bg-custom-orange/60 text-xs;
     }
 
 
     input, textarea {
-        @apply w-fit text-sm px-4 py-2 outline-none bg-lightGray
+        @apply w-full text-sm px-4 py-2 outline-none bg-lightGray
+    }
+
+    .error {
+        @apply text-xs font-bold text-red-400 mt-1
     }
 }
