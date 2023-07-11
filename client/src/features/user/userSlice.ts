@@ -11,9 +11,7 @@ export interface State {
 
 // Get user from LocalStorage
 // @ts-ignore
-const getCustomerFromLocalStorage = localStorage.getItem("customer")
-  ? JSON.parse(localStorage.getItem("customer"))
-  : null
+const getCustomerFromLocalStorage = localStorage.getItem("customer") || null
 
 const initialState: State = {
   user: getCustomerFromLocalStorage,
@@ -54,6 +52,7 @@ export const getUserProductsWishlist = createAsyncThunk(
     try {
       return await authService.getUserWishlist()
     } catch (e) {
+      // @ts-ignore
       return thunkAPI.rejectWithValue(e)
     }
   },

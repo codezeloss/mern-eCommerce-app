@@ -24,6 +24,7 @@ export const getAllProducts = createAsyncThunk(
     try {
       return await productService.getProducts()
     } catch (e) {
+      // @ts-ignore
       return thunkAPI.rejectWithValue(e)
     }
   },

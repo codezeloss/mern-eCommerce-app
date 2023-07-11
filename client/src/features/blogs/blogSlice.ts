@@ -24,6 +24,7 @@ export const getAllBlogs = createAsyncThunk(
     try {
       return await blogService.getBlogs()
     } catch (e) {
+      // @ts-ignore
       return thunkAPI.rejectWithValue(e)
     }
   },
