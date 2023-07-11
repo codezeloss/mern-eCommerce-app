@@ -18,7 +18,7 @@ interface Props {
 }
 
 function OurStore() {
-  const [grid, setGrid] = useState(4)
+  const [grid, setGrid] = useState(3)
   const dispatch = useDispatch()
 
   const productState = useSelector((state: any) => state.product)

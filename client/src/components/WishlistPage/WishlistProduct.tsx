@@ -1,13 +1,46 @@
 import tabletImg from "../../../public/assets/images/tab.jpg"
 import xMark from "../../../public/assets/icons/x-mark.svg"
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { getUserProductsWishlist } from "../../features/user/userSlice"
+import { addProductToWishList } from "../../features/product/productSlice"
 
-function WishlistProduct() {
+interface Props {
+  productId: string
+  image: string
+  title: string
+  price: number
+}
+
+function WishlistProduct({
+  productId,
+  image = tabletImg,
+  title,
+  price,
+}: Props) {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(getUserProductsWishlist())
+  }, [])
+
+  // Remove product from the wishlist
+  const removeFromWishlist = () => {
+    // @ts-ignore
+    dispatch(addProductToWishList(productId))
+
+    setTimeout(() => {
+      getUserProductsWishlist()
+    }, 300)
+  }
+
   return (
     <div className="w-60 relative">
-      <img className="w-60 h-60" src={tabletImg} alt="" />
+      <img className="w-60 h-60" src={image} alt="" />
       <div className="absolute top-0 right-0 flex items-center justify-between pt-2 px-2">
-        <div></div>
-        <button type="button">
+        <div />
+        <button type="button" onClick={removeFromWishlist}>
           <img className="w-5 h-5" src={xMark} alt="Delete" />
         </button>
       </div>
@@ -15,9 +48,9 @@ function WishlistProduct() {
       <div className="text-sm">
         <div className="py-1">
           <h3 className="text-sm hover:underline mb-4 font-bold cursor-pointer">
-            Honor T1 7.0.1 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+3G Tablet
+            {title}
           </h3>
-          <p className="font-semibold">$100.00</p>
+          <p className="font-semibold">${price}</p>
         </div>
       </div>
     </div>

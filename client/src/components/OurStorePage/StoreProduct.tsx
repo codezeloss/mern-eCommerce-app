@@ -3,6 +3,9 @@ import heart from "../../../public/assets/icons/heart-black.svg"
 import Rating from "@mui/material/Rating"
 import { addProductToWishList } from "../../features/product/productSlice"
 import { useDispatch } from "react-redux"
+import Checkbox from "@mui/material/Checkbox"
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder"
+import Favorite from "@mui/icons-material/Favorite"
 
 interface Props {
   id: string
@@ -41,8 +44,16 @@ function StoreProduct({
       <div className={`${grid === 1 ? "w-[250px]" : ""}`}>
         <div className="flex items-center justify-between">
           <div />
-          <button type="button" onClick={addToWishlist}>
-            <img className="w-4 h-4 text-black" src={heart} alt="Like" />
+          <button className="text-xs" type="button" onClick={addToWishlist}>
+            <Checkbox
+              sx={{
+                color: "#ff3d47",
+                p: 0,
+                fontSize: "12px",
+              }}
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
           </button>
         </div>
 

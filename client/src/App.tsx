@@ -36,7 +36,7 @@ function App() {
             />
             <Route path="/account/reset-password" element={<ResetPassword />} />
             <Route path="/account/register" element={<SignUp />} />
-            <Route path="/blogs/:id" element={<SingleBlog />} />
+            <Route path="/blogs/blog/:id" element={<SingleBlog />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/cart/checkout/information" element={<Checkout />} />
             <Route path="/cart/checkout/shipping" element={<Checkout />} />
