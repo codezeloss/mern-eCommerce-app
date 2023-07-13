@@ -393,10 +393,10 @@ const resetPassword = asyncHandler(async (req, res) => {
 // @route  GET /wishlist
 // @access Private
 const getWishlist = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
+  const { id } = req.user;
 
   try {
-    const user = await User.findById(_id).populate("wishlist");
+    const user = await User.findById(id).populate("wishlist");
     res.json(user);
   } catch (error) {
     throw new Error(error);

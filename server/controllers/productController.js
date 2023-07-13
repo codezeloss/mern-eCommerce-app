@@ -131,11 +131,11 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // @route  POST /wishlist
 // @access
 const addToWishList = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
+  const { id } = req.user;
   const { productId } = req.body;
 
   try {
-    const user = await User.findById(_id);
+    const user = await User.findById(id);
 
     // Check if the product already added to the user wishlist
     const productAlreadyAdded = user?.wishlist?.find(
@@ -144,7 +144,7 @@ const addToWishList = asyncHandler(async (req, res) => {
 
     if (productAlreadyAdded) {
       let user = await User.findByIdAndUpdate(
-        _id,
+        id,
         {
           $pull: { wishlist: productId },
         },
@@ -153,7 +153,7 @@ const addToWishList = asyncHandler(async (req, res) => {
       res.json(user);
     } else {
       let user = await User.findByIdAndUpdate(
-        _id,
+        id,
         {
           $push: { wishlist: productId },
         },

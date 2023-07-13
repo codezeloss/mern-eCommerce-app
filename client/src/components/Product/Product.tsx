@@ -1,19 +1,44 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
-
 import heart from "/public/assets/icons/heart-black.svg"
 import Rating from "@mui/material/Rating"
+import Checkbox from "@mui/material/Checkbox"
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder"
+import Favorite from "@mui/icons-material/Favorite"
+import { useDispatch } from "react-redux"
+import { addProductToWishList } from "../../features/product/productSlice"
 
-function Product({ src, brand, title, price }: Props) {
-  const [value, setValue] = useState(2)
+interface Props {
+  productId: string
+  src: any
+  brand: string
+  title: string
+  price: string
+  totalRating: number
+}
+
+function Product({ productId, src, brand, title, price, totalRating }: Props) {
+  const dispatch = useDispatch()
+
+  const addToWishlist = () => {
+    // @ts-ignore
+    dispatch(addProductToWishList(productId))
+  }
 
   return (
     <div className="w-full bg-white shadom-sm rounded-md p-4">
       <div>
         <div className="flex items-center justify-between">
           <div></div>
-          <button type="button">
-            <img className="w-4 h-4 text-black" src={heart} alt="Like" />
+          <button className="text-xs" type="button" onClick={addToWishlist}>
+            <Checkbox
+              sx={{
+                color: "#ff3d47",
+                p: 0,
+                fontSize: "12px",
+              }}
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
           </button>
         </div>
 
@@ -33,14 +58,13 @@ function Product({ src, brand, title, price }: Props) {
             {title}
           </h3>
         </Link>
-        <Rating
-          sx={{ fontSize: 18, mb: 1.5 }}
-          name="simple-controlled"
-          value={value}
-          onChange={(e: any) => {
-            setValue(e.target.value)
-          }}
-        />
+        <div>
+          <Rating
+            sx={{ fontSize: 18, mb: 1.5 }}
+            name="simple-controlled"
+            value={totalRating}
+          />
+        </div>
         <p className="text-sm font-medium">${price}</p>
       </div>
     </div>
@@ -48,10 +72,3 @@ function Product({ src, brand, title, price }: Props) {
 }
 
 export default Product
-
-interface Props {
-  src: any
-  brand: string
-  title: string
-  price: string
-}

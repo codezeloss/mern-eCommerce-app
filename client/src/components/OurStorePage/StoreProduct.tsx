@@ -8,7 +8,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder"
 import Favorite from "@mui/icons-material/Favorite"
 
 interface Props {
-  id: string
+  productId: string
   src: any
   description: string
   rating: number
@@ -19,7 +19,7 @@ interface Props {
 }
 
 function StoreProduct({
-  id,
+  productId,
   src,
   description,
   rating,
@@ -32,7 +32,7 @@ function StoreProduct({
 
   const addToWishlist = () => {
     // @ts-ignore
-    dispatch(addProductToWishList(id))
+    dispatch(addProductToWishList(productId))
   }
 
   return (

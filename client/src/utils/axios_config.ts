@@ -1,10 +1,15 @@
 // @ts-ignore
-const getTokenFromLocalStorage = localStorage.getItem("customer") || ""
+const getTokenFromLocalStorage = localStorage.getItem("token")
+  ? JSON.parse(localStorage.getItem("user"))
+  : ""
 
 export const config = {
   headers: {
-    // @ts-ignore
-    Authorization: `Bearer ${getTokenFromLocalStorage.token || ""}`,
+    Authorization: `Bearer ${
+      getTokenFromLocalStorage.token !== null
+        ? getTokenFromLocalStorage.token
+        : ""
+    }`,
     Accept: "application/json",
   },
 }

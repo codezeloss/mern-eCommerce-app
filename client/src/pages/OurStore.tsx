@@ -50,7 +50,7 @@ function OurStore() {
                     (product: Props, index: React.Key | null | undefined) => (
                       <div key={index}>
                         <StoreProduct
-                          id={product._id}
+                          productId={product._id}
                           src={product.images[0]?.url}
                           description={product.description}
                           rating={product.totalRating}
