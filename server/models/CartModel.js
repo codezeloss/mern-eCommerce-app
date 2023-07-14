@@ -1,39 +1,33 @@
-const {Schema, model} = require('mongoose')
+const { Schema, model } = require("mongoose");
 
-const CartSchema = new Schema({
-        products: [
-            {
-                product: {
-                    type: Schema.Types.ObjectId,
-                    ref: "Product"
-                },
-                count: {
-                    type: Number
-                },
-                color: {
-                    type: String
-                },
-                price: {
-                    type: Number
-                }
-            }
-        ],
-        cartTotal: {
-            type: Number
-        },
-        totalAfterDiscount: {
-            type: Number
-        },
-        orderBy: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }
+const CartSchema = new Schema(
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
-    {
-        timestamps: true
-    }
-)
+    productId: {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    color: {
+      type: Schema.Types.ObjectId,
+      ref: "Color",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Cart = model('Cart', CartSchema)
+const Cart = model("Cart", CartSchema);
 
-module.exports = Cart
+module.exports = Cart;

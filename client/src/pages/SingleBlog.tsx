@@ -10,10 +10,10 @@ function SingleBlog() {
   const dispatch = useDispatch()
   const location = useLocation()
 
-  // Get blog ID
+  // ** Get blog ID
   const blogId = location.pathname.split("/")[3]
 
-  // RTK - Blog state
+  // ** RTK - Blog state
   const blogState = useSelector((state: any) => state.blog.blog)
 
   useEffect(() => {

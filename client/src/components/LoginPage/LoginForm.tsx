@@ -16,11 +16,11 @@ function LoginForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // RTK
+  // ** RTK
   const userState = useSelector((state: any) => state.auth)
   const { isLoading, isError, isSuccess, user } = userState
 
-  // Formik
+  // ** Formik
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -33,7 +33,7 @@ function LoginForm() {
     },
   })
 
-  // Toast Notification
+  // ** Toast Notification
   useEffect(() => {
     if (isSuccess && user) {
       toast.success("Login successfully!", {})

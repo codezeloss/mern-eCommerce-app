@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import heart from "../../../public/assets/icons/heart-black.svg"
 import Rating from "@mui/material/Rating"
 import { addProductToWishList } from "../../features/product/productSlice"
@@ -29,6 +29,7 @@ function StoreProduct({
   grid,
 }: Props) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const addToWishlist = () => {
     // @ts-ignore
@@ -59,11 +60,12 @@ function StoreProduct({
 
         <div>
           <img
-            className={`w-full h-[250px] object-cover text-sm ${
+            className={`w-full h-[250px] object-cover text-sm cursor-pointer ${
               grid === 1 ? "w-[250px] h-[100%]" : ""
             }`}
             src={src}
             alt="FamousProduct"
+            onClick={() => navigate(`/product/${productId}`)}
           />
         </div>
       </div>

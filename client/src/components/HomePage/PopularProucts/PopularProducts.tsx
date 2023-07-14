@@ -2,9 +2,7 @@ import Product from "../../Product/Product"
 import { productData } from "../../Product/productData"
 import { useDispatch, useSelector } from "react-redux"
 import React, { useEffect } from "react"
-import { getAllBlogs } from "../../../features/blogs/blogSlice"
 import { getAllProducts } from "../../../features/product/productSlice"
-import SpecialProduct from "../SpecialProducts/SpecialProduct"
 
 interface Props {
   _id: string
@@ -42,7 +40,7 @@ function PopularProducts() {
                     <div key={index}>
                       <Product
                         productId={product?._id}
-                        src={product?.image}
+                        src={product?.images[0]?.url}
                         brand={product?.brand}
                         title={product?.title}
                         price={product?.price}

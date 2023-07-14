@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import heart from "/public/assets/icons/heart-black.svg"
 import Rating from "@mui/material/Rating"
 import Checkbox from "@mui/material/Checkbox"
@@ -18,6 +18,7 @@ interface Props {
 
 function Product({ productId, src, brand, title, price, totalRating }: Props) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const addToWishlist = () => {
     // @ts-ignore
@@ -28,7 +29,7 @@ function Product({ productId, src, brand, title, price, totalRating }: Props) {
     <div className="w-full bg-white shadom-sm rounded-md p-4">
       <div>
         <div className="flex items-center justify-between">
-          <div></div>
+          <div />
           <button className="text-xs" type="button" onClick={addToWishlist}>
             <Checkbox
               sx={{
@@ -44,9 +45,10 @@ function Product({ productId, src, brand, title, price, totalRating }: Props) {
 
         <div>
           <img
-            className="w-full h-[200px] object-cover"
+            className="w-full h-[200px] object-cover cursor-pointer"
             src={src}
             alt="FamousProduct"
+            onClick={() => navigate(`/product/${productId}`)}
           />
         </div>
       </div>

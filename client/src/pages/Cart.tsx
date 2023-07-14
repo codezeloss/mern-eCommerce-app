@@ -2,8 +2,24 @@ import BreadCrumb from "../components/BreadCrumb"
 import BlogPageDetails from "../components/BlogsPage/BlogPageDetails"
 import ProductCart from "../components/CartPage/ProductCart"
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { getUserCart } from "../features/user/userSlice"
 
 function Cart() {
+  const dispatch = useDispatch()
+
+  // ** RTK - User cart state
+  const userCartState = useSelector((state: any) => state.auth.userCart)
+  console.log(userCartState)
+
+  // ** Get user cart
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(getUserCart())
+  }, [])
+  console.log(userCartState)
+
   return (
     <>
       <div>
@@ -28,11 +44,19 @@ function Cart() {
               </div>
             </div>
 
-            {/* !! map() */}
             <div>
-              <ProductCart />
-              <ProductCart />
-              <ProductCart />
+              {userCartState &&
+                userCartState?.map((product: any, index: React.Key) => (
+                  <div key={index}>
+                    <ProductCart
+                      image={userCartState[index]?.productId.images[0]?.url}
+                      title={userCartState[index]?.productId.title}
+                      color={userCartState[index]?.color.title}
+                      price={userCartState[index]?.price}
+                      quantity={userCartState[index]?.quantity}
+                    />
+                  </div>
+                ))}
             </div>
 
             <Link

@@ -41,7 +41,7 @@ function App() {
             <Route path="/cart/checkout/information" element={<Checkout />} />
             <Route path="/cart/checkout/shipping" element={<Checkout />} />
             <Route path="/cart/checkout/payment" element={<Checkout />} />
-            <Route path="/products/:id" element={<SingleProduct />} />
+            <Route path="/product/:id" element={<SingleProduct />} />
           </Route>
         </Routes>
       </BrowserRouter>

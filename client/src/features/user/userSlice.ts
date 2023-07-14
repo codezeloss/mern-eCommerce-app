@@ -57,6 +57,32 @@ export const getUserProductsWishlist = createAsyncThunk(
     }
   },
 )
+
+// ** Add to User Cart
+export const addProductToUserCart = createAsyncThunk(
+  "auth/add-to-cart",
+  async (cartData: any, thunkAPI) => {
+    try {
+      return await authService.addToCart(cartData)
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
+
+// ** GET User Cart
+export const getUserCart = createAsyncThunk(
+  "auth/get-cart",
+  async (thunkAPI) => {
+    try {
+      return await authService.getCart()
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
 // **
 
 export const authSlice = createSlice({
@@ -114,6 +140,40 @@ export const authSlice = createSlice({
         state.message = "success"
       })
       .addCase(getUserProductsWishlist.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(addProductToUserCart.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(addProductToUserCart.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.addedToCart = action.payload
+        state.message = "success"
+      })
+      .addCase(addProductToUserCart.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(getUserCart.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getUserCart.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.userCart = action.payload
+        state.message = "success"
+      })
+      .addCase(getUserCart.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.isSuccess = false

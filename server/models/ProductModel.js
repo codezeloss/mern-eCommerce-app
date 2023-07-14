@@ -44,8 +44,8 @@ const ProductSchema = new Schema(
     ],
     color: [
       {
-        _id: String,
-        color: String,
+        type: Schema.Types.ObjectId,
+        ref: "Color",
       },
     ],
     tags: String,

@@ -1,26 +1,51 @@
 import speakerImg from "../../../public/assets/images/speaker.jpg"
 import trashIcon from "../../../public/assets/icons/trash-icon.svg"
 
-function ProductCart() {
+interface Props {
+  image: any
+  title: string
+  color: string
+  price: number
+  quantity: number
+}
+
+function ProductCart({ image, title, color, price, quantity }: Props) {
   return (
     <div className="grid grid-cols-5 items-center pb-8 border-b-gray/[.1] border-b-[1px] mb-8">
       <div className="col-span-2">
         <div className="flex items-center gap-6 mr-20">
-          <img className="w-22 h-22" src={speakerImg} alt="" />
+          <div className="w-40 h-40">
+            <img
+              className="text-sm w-40 h-40"
+              src={image}
+              alt="Product image"
+            />
+          </div>
           <div className="text-xs text-gray/[.6] flex flex-col gap-2">
-            <p>Kids headphones bulk 10 pack multi colored for students</p>
+            <p>{title}</p>
             <p>Size: S</p>
-            <p>Color: #A85A5A</p>
+            <p>
+              Color:{" "}
+              <p
+                className={`w-fit p-3 rounded-full`}
+                style={{ backgroundColor: color.toLowerCase() }}
+              />
+            </p>
           </div>
         </div>
       </div>
 
       <div>
-        <p className="font-semibold text-sm">$100.00</p>
+        <p className="font-semibold text-sm">${price}</p>
       </div>
 
       <div className="flex items-center gap-3">
-        <input className="w-16 bg-white" type="number" placeholder="1" />
+        <input
+          className="w-24 bg-white"
+          type="number"
+          placeholder="1"
+          value={quantity}
+        />
         <button className="" type="button">
           <img
             className="bg-primary w-8 h-8 p-2 rounded-full"
@@ -31,7 +56,7 @@ function ProductCart() {
       </div>
 
       <div>
-        <p className="font-semibold text-sm">$100.00</p>
+        <p className="font-semibold text-sm">${price}</p>
       </div>
     </div>
   )
