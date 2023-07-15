@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import authService from "./userService"
+import { toast } from "react-toastify"
 
 export interface State {
   user: any
@@ -77,6 +78,32 @@ export const getUserCart = createAsyncThunk(
   async (thunkAPI) => {
     try {
       return await authService.getCart()
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
+
+// ** DELETE product from Cart
+export const deleteProductFromCart = createAsyncThunk(
+  "auth/delete-cart-product",
+  async (cartItemId: any, thunkAPI) => {
+    try {
+      return await authService.removeProductFromCart(cartItemId)
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
+
+// ** UPDATE product quantity in the Cart
+export const updateProductCartQuantity = createAsyncThunk(
+  "auth/update-product-quantity",
+  async (cartDetails: any, thunkAPI) => {
+    try {
+      return await authService.updateProductQuantityFromCart(cartDetails)
     } catch (e) {
       // @ts-ignore
       return thunkAPI.rejectWithValue(e)
@@ -174,6 +201,46 @@ export const authSlice = createSlice({
         state.message = "success"
       })
       .addCase(getUserCart.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(deleteProductFromCart.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteProductFromCart.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.deletedCartProduct = action.payload
+        state.message = "success"
+        if (state.isSuccess) {
+          toast.success("Product deleted from Cart successfully")
+        }
+      })
+      .addCase(deleteProductFromCart.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+        if (state.isSuccess === false) {
+          toast.error("Something went wrong!")
+        }
+      })
+      .addCase(updateProductCartQuantity.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateProductCartQuantity.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.updatedQuantity = action.payload
+        state.message = "success"
+      })
+      .addCase(updateProductCartQuantity.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.isSuccess = false

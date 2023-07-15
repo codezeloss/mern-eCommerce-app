@@ -4,6 +4,7 @@ import copyIcon from "/public/assets/icons/copy-icon.svg"
 import compareIcon from "/public/assets/icons/arrow-right-left.svg"
 import React, { useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
   productTitle: string
@@ -18,6 +19,7 @@ interface Props {
   enteredQuantity: any
   setEnteredColor: any
   setEnteredQuantity: any
+  alreadyAdded: boolean
 }
 
 function ProductDetails({
@@ -33,7 +35,10 @@ function ProductDetails({
   enteredQuantity,
   setEnteredColor,
   setEnteredQuantity,
+  alreadyAdded,
 }: Props) {
+  const navigate = useNavigate()
+
   return (
     <div>
       <h3 className="text-lg py-2 mb-1 border-b border-b-gray/[.1]">
@@ -95,7 +100,7 @@ function ProductDetails({
         </div>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-3">
         <p className="font-bold text-sm">Color:</p>
         <div className="text-xs text-gray/[.7] flex items-center gap-2">
           {colors &&
@@ -112,20 +117,44 @@ function ProductDetails({
         </div>
       </div>
 
+      <div className="inline-block">
+        {alreadyAdded && (
+          <p className="text-xs text-gray/[.7] mb-2">
+            This product is already added to your cart
+          </p>
+        )}
+      </div>
+
       <div className="flex items-center gap-6 mb-8">
-        <p className="font-bold text-sm">Quantity:</p>
-        <input
-          className="w-20"
-          type="number"
-          placeholder="1"
-          value={enteredQuantity}
-          onChange={(e) => setEnteredQuantity(e.target.value)}
-        />
+        {!alreadyAdded && (
+          <div>
+            <p className="font-bold text-sm">Quantity:</p>
+            <input
+              className="w-20"
+              type="number"
+              placeholder="1"
+              value={enteredQuantity}
+              onChange={(e) => setEnteredQuantity(e.target.value)}
+            />
+          </div>
+        )}
         <div className="w-full flex items-center gap-2">
-          <button className="block primary-btn" onClick={addProductToCart}>
-            Add to Cart
-          </button>
-          <button className="block secondary-btn">Buy It Now</button>
+          {alreadyAdded && (
+            <button
+              className="block primary-btn"
+              onClick={() => navigate("/cart")}
+            >
+              Go to Cart
+            </button>
+          )}
+          {!alreadyAdded && (
+            <>
+              <button className="block primary-btn" onClick={addProductToCart}>
+                Add to Cart
+              </button>
+              <button className="block secondary-btn">Buy It Now</button>
+            </>
+          )}
         </div>
       </div>
 
@@ -140,7 +169,7 @@ function ProductDetails({
         </button>
         <button
           type="button"
-          className="flex items-center gap-1"
+          className="flex pl-4 items-center gap-1"
           onClick={() => {}}
         >
           <img className="w-5 h-5" src={copyIcon} alt="Like" />

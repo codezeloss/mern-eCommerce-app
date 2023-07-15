@@ -3,22 +3,23 @@ import BlogPageDetails from "../components/BlogsPage/BlogPageDetails"
 import ProductCart from "../components/CartPage/ProductCart"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import React, { useEffect } from "react"
-import { getUserCart } from "../features/user/userSlice"
+import React, { useEffect, useState } from "react"
+import {
+  getUserCart,
+  updateProductCartQuantity,
+} from "../features/user/userSlice"
 
 function Cart() {
   const dispatch = useDispatch()
 
   // ** RTK - User cart state
   const userCartState = useSelector((state: any) => state.auth.userCart)
-  console.log(userCartState)
 
   // ** Get user cart
   useEffect(() => {
     // @ts-ignore
     dispatch(getUserCart())
   }, [])
-  console.log(userCartState)
 
   return (
     <>
@@ -46,9 +47,11 @@ function Cart() {
 
             <div>
               {userCartState &&
-                userCartState?.map((product: any, index: React.Key) => (
+                userCartState.map((product: any, index: React.Key) => (
                   <div key={index}>
                     <ProductCart
+                      itemId={userCartState[index]?._id}
+                      productId={userCartState[index]?.productId._id}
                       image={userCartState[index]?.productId.images[0]?.url}
                       title={userCartState[index]?.productId.title}
                       color={userCartState[index]?.color.title}

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getSingleProduct } from "../features/product/productSlice"
-import { addProductToUserCart } from "../features/user/userSlice"
+import { addProductToUserCart, getUserCart } from "../features/user/userSlice"
 import { toast } from "react-toastify"
 
 function SingleProduct() {
@@ -17,19 +17,33 @@ function SingleProduct() {
   const location = useLocation()
   const [enteredColor, setEnteredColor] = useState(null)
   const [enteredQuantity, setEnteredQuantity] = useState("")
+  const [alreadyAdded, setAlreadyAdded] = useState(false)
 
   // ** Get product ID
   const productId = location.pathname.split("/")[2]
 
   // ** RTK - Product state
   const productState = useSelector((state: any) => state.product.product)
+  const cartState = useSelector((state: any) => state.auth.userCart)
 
   // **
   useEffect(() => {
     // @ts-ignore
     dispatch(getSingleProduct(productId))
+    // @ts-ignore
+    dispatch(getUserCart())
   }, [productId])
 
+  // ** Check if the current Product is already added to the cart
+  useEffect(() => {
+    for (let i = 0; i < cartState.length; i++) {
+      if (productId === cartState[i]?.productId?._id) {
+        setAlreadyAdded(true)
+      }
+    }
+  }, [])
+
+  // ** Add Product to user Cart
   const addProductToCart = () => {
     if (enteredColor === null) {
       toast.error("Please choose a Color")
@@ -81,6 +95,7 @@ function SingleProduct() {
                       enteredQuantity={enteredQuantity}
                       setEnteredColor={setEnteredColor}
                       setEnteredQuantity={setEnteredQuantity}
+                      alreadyAdded={alreadyAdded}
                     />
                     <Accordions />
                   </div>

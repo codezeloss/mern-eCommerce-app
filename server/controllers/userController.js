@@ -442,6 +442,43 @@ const getUserCart = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc   Remove Product from User Cart
+// @route  DELETE /delete-cart-product
+// @access Private
+const removeProductFromCart = asyncHandler(async (req, res) => {
+  const { id } = req.user;
+  const { cartItemId } = req.params;
+  validateMongodbId(id);
+
+  try {
+    const deletedProductFromCart = await Cart.findOneAndDelete(cartItemId);
+    res.json(deletedProductFromCart);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc   Update Product Quantity
+// @route  PUT /update-product-quantity
+// @access Private
+const updateCartProductQuantity = asyncHandler(async (req, res) => {
+  const { id } = req.user;
+  const { cartItemId, newQuantity } = req.params;
+  validateMongodbId(id);
+
+  try {
+    const cartItem = await Cart.findOne({
+      userId: id,
+      _id: cartItemId,
+    });
+    cartItem.quantity = newQuantity;
+    cartItem.save();
+    res.json(cartItem);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
 // @desc   Empty CartPage
 // @route  DELETE /empty-cart
 // @access Private
@@ -623,10 +660,12 @@ module.exports = {
   saveAddress,
   userCart,
   getUserCart,
+  removeProductFromCart,
   emptyCart,
   applyCoupon,
   createOrder,
   getAllOrders,
   getOrderByUserId,
   updateOrder,
+  updateCartProductQuantity,
 };

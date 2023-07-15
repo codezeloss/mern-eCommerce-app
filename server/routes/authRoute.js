@@ -25,6 +25,8 @@ const {
   getAllOrders,
   updateOrder,
   getOrderByUserId,
+  removeProductFromCart,
+  updateCartProductQuantity,
 } = require("../controllers/userController");
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -50,8 +52,16 @@ router.put("/block-user/:id", authMiddleware, isAdmin, blockUser);
 router.put("/unblock-user/:id", authMiddleware, isAdmin, unblockUser);
 router.put("/password", authMiddleware, updatePassword);
 router.put("/reset-password/:token", resetPassword);
-
+router.delete(
+  "/update-product-quantity/:cartItemId/:newQuantity",
+  authMiddleware,
+  updateCartProductQuantity
+);
+router.delete(
+  "/delete-cart-product/:cartItemId",
+  authMiddleware,
+  removeProductFromCart
+);
 router.delete("/empty-cart", authMiddleware, emptyCart);
 router.delete("/:id", deleteUser);
-
 module.exports = router;
