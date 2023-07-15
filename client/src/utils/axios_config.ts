@@ -1,7 +1,11 @@
 // @ts-ignore
-const getTokenFromLocalStorage = localStorage.getItem("token")
-  ? JSON.parse(localStorage.getItem("user"))
-  : ""
+let getTokenFromLocalStorage
+if (localStorage.getItem("user")) {
+  // @ts-ignore
+  getTokenFromLocalStorage = JSON.parse(localStorage.getItem("user"))
+} else {
+  getTokenFromLocalStorage = ""
+}
 
 export const config = {
   headers: {

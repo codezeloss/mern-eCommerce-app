@@ -18,6 +18,11 @@ interface Props {
   quantity: number
 }
 
+interface DataProps {
+  cartItemId: string
+  newQuantity: number
+}
+
 function ProductCart({
   itemId,
   productId,
@@ -28,7 +33,8 @@ function ProductCart({
   quantity,
 }: Props) {
   const dispatch = useDispatch()
-  const [productUpdateDetails, setProductUpdateDetails] = useState(null)
+  const [productUpdateDetails, setProductUpdateDetails] =
+    useState<DataProps | null>(null)
 
   // **
   useEffect(() => {
@@ -39,13 +45,12 @@ function ProductCart({
   // **
   useEffect(() => {
     if (productUpdateDetails !== null) {
+      const data: DataProps = {
+        cartItemId: productUpdateDetails?.cartItemId,
+        newQuantity: productUpdateDetails?.newQuantity,
+      }
       // @ts-ignore
-      dispatch(
-        updateProductCartQuantity({
-          cartItemId: productUpdateDetails?.cartItemId,
-          newQuantity: productUpdateDetails?.newQuantity,
-        }),
-      )
+      dispatch(updateProductCartQuantity(data))
       setTimeout(() => {
         // @ts-ignore
         dispatch(getUserCart())
@@ -120,7 +125,7 @@ function ProductCart({
       </div>
 
       <div>
-        <p className="font-semibold text-sm">${price}</p>
+        <p className="font-semibold text-sm">${price * quantity}</p>
       </div>
     </div>
   )

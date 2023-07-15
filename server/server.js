@@ -9,9 +9,9 @@ dotenv.config({ path: "./config.env" });
 connectDB();
 
 // PORT
-const PORT = 4000 || process.env.PORT;
+const PORT = 3000 || process.env.PORT;
 
 // listen to server
 app.listen(PORT, () => {
-    console.log("::: 🚀 Server has started :::".cyan.bold);
+  console.log("::: 🚀 Server has started :::".cyan.bold);
 });

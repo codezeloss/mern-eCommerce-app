@@ -19,14 +19,9 @@ const {
   saveAddress,
   userCart,
   getUserCart,
-  emptyCart,
-  applyCoupon,
-  createOrder,
-  getAllOrders,
-  updateOrder,
-  getOrderByUserId,
   removeProductFromCart,
   updateCartProductQuantity,
+  createOrder,
 } = require("../controllers/userController");
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -36,16 +31,11 @@ router.post("/login-admin", loginAdmin);
 router.get("/wishlist", authMiddleware, getWishlist);
 router.post("/cart", authMiddleware, userCart);
 router.get("/cart", authMiddleware, getUserCart);
-router.post("/cart/apply-coupon", authMiddleware, applyCoupon);
-router.post("/cart/cash-order", authMiddleware, createOrder);
 router.get("/all-users", getAllUsers);
-router.get("/orders", authMiddleware, isAdmin, getAllOrders);
-router.get("/user-orders/:id", authMiddleware, isAdmin, getOrderByUserId);
 router.post("logout", logoutUser);
 router.post("/forgot-password-token", forgotPasswordToken);
 router.get("/refresh/:id", authMiddleware, isAdmin, handleRefreshToken);
 router.get("/:id", authMiddleware, isAdmin, getUser);
-router.put("/order/update-order/:id", authMiddleware, isAdmin, updateOrder);
 router.put("/edit-user/:id", authMiddleware, updateUser);
 router.put("/save-address", authMiddleware, saveAddress);
 router.put("/block-user/:id", authMiddleware, isAdmin, blockUser);
@@ -62,6 +52,17 @@ router.delete(
   authMiddleware,
   removeProductFromCart
 );
-router.delete("/empty-cart", authMiddleware, emptyCart);
 router.delete("/:id", deleteUser);
+router.post("/cart/create-order", authMiddleware, createOrder);
+
 module.exports = router;
+
+{
+  /*
+  router.post("/cart/apply-coupon", authMiddleware, applyCoupon);
+  router.get("/orders", authMiddleware, isAdmin, getAllOrders);
+  router.get("/user-orders/:id", authMiddleware, isAdmin, getOrderByUserId);
+  router.put("/order/update-order/:id", authMiddleware, isAdmin, updateOrder);
+  router.delete("/empty-cart", authMiddleware, emptyCart);
+  */
+}

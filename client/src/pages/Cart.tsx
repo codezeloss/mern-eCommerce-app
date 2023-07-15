@@ -4,13 +4,11 @@ import ProductCart from "../components/CartPage/ProductCart"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import React, { useEffect, useState } from "react"
-import {
-  getUserCart,
-  updateProductCartQuantity,
-} from "../features/user/userSlice"
+import { getUserCart } from "../features/user/userSlice"
 
 function Cart() {
   const dispatch = useDispatch()
+  const [totalAmount, setTotalAmount] = useState(0)
 
   // ** RTK - User cart state
   const userCartState = useSelector((state: any) => state.auth.userCart)
@@ -20,6 +18,19 @@ function Cart() {
     // @ts-ignore
     dispatch(getUserCart())
   }, [])
+
+  // ** Get Total cart Amount
+  useEffect(() => {
+    let sum = 0
+    if (userCartState) {
+      for (let i = 0; i < userCartState.length; i++) {
+        sum = sum + Number(userCartState[i].quantity) * userCartState[i].price
+        setTotalAmount(sum)
+      }
+    } else {
+      setTotalAmount(0)
+    }
+  }, [userCartState])
 
   return (
     <>
@@ -69,27 +80,33 @@ function Cart() {
               Continue Shopping
             </Link>
 
-            <div className="flex items-center mt-10 justify-between">
-              <div />
-              <div>
-                <div className="text-gray/[.6] text-end text-sm">
-                  <div className="flex items-center justify-between">
-                    <div></div>
-                    <div className="flex items-center gap-4 mb-2">
-                      <p>Subtotal</p>
-                      <p className="font-semibold">$100.00</p>
+            {(totalAmount !== null || totalAmount !== 0) && (
+              <div className="flex items-center mt-10 justify-between">
+                <div />
+                <div>
+                  <div className="text-end ">
+                    <div className="flex items-center justify-between">
+                      <div />
+                      <div className="text-base font-semibold text-gray flex items-center gap-4 mb-2">
+                        <p>Subtotal</p>
+                        <p className="font-semibold">
+                          ${totalAmount ? totalAmount : 0}
+                        </p>
+                      </div>
                     </div>
+                    <p className="text-xs text-gray/[.6]">
+                      Taxes and shipping calculated at checkout
+                    </p>
                   </div>
-                  <p>Taxes and shipping calculated at checkout</p>
+                  <Link
+                    to="/cart/checkout/information"
+                    className="w-full primary-btn py-3 mt-4 normal-case text-xs text-center"
+                  >
+                    Check Out
+                  </Link>
                 </div>
-                <Link
-                  to="/cart/checkout/information"
-                  className="w-full primary-btn py-3 mt-4 normal-case text-xs text-center"
-                >
-                  Check Out
-                </Link>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

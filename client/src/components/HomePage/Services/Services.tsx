@@ -4,8 +4,14 @@ import { data } from "./data"
 function Services() {
   return (
     <div className="container py-14 flex items-center justify-between">
-      {data.map((service) => (
-        <Service src={service.icon} title={service.title} desc={service.desc} />
+      {data.map((service, index) => (
+        <div key={index}>
+          <Service
+            src={service.icon}
+            title={service.title}
+            desc={service.desc}
+          />
+        </div>
       ))}
     </div>
   )

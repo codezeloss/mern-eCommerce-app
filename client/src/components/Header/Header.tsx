@@ -9,13 +9,41 @@ import ChevronDown from "../../../public/assets/icons/ChevronDown"
 import HeaderLinks from "./HeaderLinks"
 import HeaderOptions from "./HeaderOptions"
 import HeaderCart from "./HeaderCart"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { getUserCart } from "../../features/user/userSlice"
 
 function Header() {
+  const dispatch = useDispatch()
+  const [totalAmount, setTotalAmount] = useState(0)
+
+  // ** RTK - User cart state
+  const userCartState = useSelector((state: any) => state.auth.userCart)
+
+  // ** Get user cart
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(getUserCart())
+  }, [])
+
+  // ** Get Total cart Amount
+  useEffect(() => {
+    let sum = 0
+    if (userCartState) {
+      for (let i = 0; i < userCartState.length; i++) {
+        sum = sum + Number(userCartState[i].quantity) * userCartState[i].price
+        setTotalAmount(sum)
+      }
+    } else {
+      setTotalAmount(0)
+    }
+  }, [userCartState])
+
   return (
     <>
       <header className="bg-primary text-white">
         {/* */}
-        <div className="border-b border-b-[1px] border-b-white/[.2]">
+        <div className="border-b-[1px] border-b-white/[.2]">
           <div
             className={
               "container flex items-center justify-between text-xs py-2"
@@ -79,8 +107,8 @@ function Header() {
               <HeaderCart
                 path="cart"
                 src={cart}
-                quantity={"0"}
-                total={"$0.00"}
+                quantity={userCartState ? userCartState.length : 0}
+                total={totalAmount ? totalAmount : 0}
               />
             </div>
           </div>

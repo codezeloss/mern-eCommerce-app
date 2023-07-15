@@ -6,7 +6,7 @@ import ProductDescription from "../components/SingleProductPage/ProductDescripti
 import Reviews from "../components/SingleProductPage/Reviews"
 import PopularProducts from "../components/SingleProductPage/PopularProducts"
 import { useDispatch, useSelector } from "react-redux"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getSingleProduct } from "../features/product/productSlice"
 import { addProductToUserCart, getUserCart } from "../features/user/userSlice"
@@ -14,6 +14,7 @@ import { toast } from "react-toastify"
 
 function SingleProduct() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const location = useLocation()
   const [enteredColor, setEnteredColor] = useState(null)
   const [enteredQuantity, setEnteredQuantity] = useState("")
@@ -61,6 +62,7 @@ function SingleProduct() {
       // @ts-ignore
       dispatch(addProductToUserCart(data))
       toast.success("Product added to your Cart!")
+      navigate("/cart")
     }
   }
 

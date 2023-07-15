@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom"
 
+interface Props {
+  path: string
+  src: any
+  quantity: number
+  total: number
+}
+
 function HeaderCart({ path, src, quantity, total }: Props) {
   return (
     <Link to={`/${path}`}>
@@ -12,7 +19,7 @@ function HeaderCart({ path, src, quantity, total }: Props) {
           <p className="bg-white rounded-md text-black w-fit px-2">
             {quantity}
           </p>
-          <p>{total}</p>
+          <p>${total}</p>
         </div>
       </div>
     </Link>
@@ -20,10 +27,3 @@ function HeaderCart({ path, src, quantity, total }: Props) {
 }
 
 export default HeaderCart
-
-interface Props {
-  path: string
-  src: any
-  quantity: string
-  total: string
-}

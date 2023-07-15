@@ -12,10 +12,10 @@ export interface State {
 
 // Get user from LocalStorage
 // @ts-ignore
-const getCustomerFromLocalStorage = localStorage.getItem("customer") || null
+const getCustomerFromLocalStorage = localStorage.getItem("user") || null
 
 const initialState: State = {
-  user: getCustomerFromLocalStorage,
+  user: JSON.parse(getCustomerFromLocalStorage),
   isError: false,
   isSuccess: false,
   isLoading: false,
