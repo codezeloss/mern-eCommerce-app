@@ -27,7 +27,7 @@ function ProductInfos({ image, quantity, title, color, price }: Props) {
           </div>
           <div>
             <p className="text-xs">{title}</p>
-            <p className="text-gray/[.9] text-xs">S / {color}</p>
+            <p className="text-gray/[.9] text-xs">{color}</p>
           </div>
         </div>
 

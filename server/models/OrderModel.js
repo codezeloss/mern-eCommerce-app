@@ -32,7 +32,7 @@ const OrderSchema = new Schema(
         type: String,
         required: true,
       },
-      pinCode: {
+      zipCode: {
         type: Number,
         required: true,
       },

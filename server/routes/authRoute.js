@@ -23,6 +23,11 @@ const {
   updateCartProductQuantity,
   createOrder,
 } = require("../controllers/userController");
+const {
+  checkout,
+  paymentVerification,
+  stripeCheckout,
+} = require("../controllers/paymentController");
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
 
 router.post("/register", createUser);
@@ -54,6 +59,9 @@ router.delete(
 );
 router.delete("/:id", deleteUser);
 router.post("/cart/create-order", authMiddleware, createOrder);
+router.post("/order/checkout", authMiddleware, checkout);
+router.post("/order/paymentVerification", authMiddleware, paymentVerification);
+router.post("/create-checkout-session", authMiddleware, stripeCheckout);
 
 module.exports = router;
 

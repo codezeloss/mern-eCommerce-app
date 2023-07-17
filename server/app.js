@@ -4,7 +4,6 @@ const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const colors = require("colors");
-
 const authRouter = require("./routes/authRoute");
 const productRouter = require("./routes/productRoute");
 const uploadRouter = require("./routes/uploadRoute");

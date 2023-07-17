@@ -1,13 +1,52 @@
-import { Link } from "react-router-dom"
-
+import { Link, useNavigate } from "react-router-dom"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
-
 import infoIcon from "../../../public/assets/icons/info-icon.svg"
 import arrowLeft from "../../../public/assets/icons/arrow-left.svg"
+import { number, object, string } from "yup"
+import { useFormik } from "formik"
+import { useDispatch } from "react-redux"
+import { useState } from "react"
+
+// ** yup Validation
+let shippingSchema = object({
+  country: string().required("Country is required"),
+  firstName: string().required("First Name is required"),
+  lastName: string().required("Last Name is required"),
+  address: string().required("Address details are required"),
+  city: string().required("City is required"),
+  state: string().required("State is required"),
+  zipCode: number().required("Zip Code is required"),
+  other: string(),
+})
 
 function ContactInfos() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [shippingInfos, setShippingInfos] = useState(null)
+
+  // ** Formik
+  const formik = useFormik({
+    initialValues: {
+      country: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      other: "",
+    },
+    validationSchema: shippingSchema,
+    onSubmit: (values: any) => {
+      setShippingInfos(values)
+      console.log(shippingInfos)
+      navigate("/cart/checkout/shipping")
+      formik.resetForm()
+    },
+  })
+
   return (
     <div className="text-xs text-gray/[.6]">
       <div>
@@ -16,14 +55,15 @@ function ContactInfos() {
           <p>Navdeep Dahiya (momo1223@gmail.com)</p>
           <button className="block w-fit">Log out</button>
           <div className="flex items-center gap-2">
-            <input type="checkbox" />
+            <input className="w-fit" type="checkbox" />
             <p>Email me with news and offers</p>
           </div>
         </div>
       </div>
 
-      <div>
+      <form onSubmit={formik.handleSubmit}>
         <h2 className="text-lg mb-4 text-primary">Shipping address</h2>
+
         <Box
           component="form"
           sx={{
@@ -33,116 +73,169 @@ function ContactInfos() {
           autoComplete="off"
         >
           <div>
-            <Autocomplete
-              id="country-select-demo"
-              sx={{ width: "100%" }}
-              options={countries}
-              autoHighlight
-              getOptionLabel={(option) => option.label}
-              renderOption={(props, option) => (
-                <Box
-                  component="li"
-                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                  {...props}
-                >
-                  <img
-                    loading="lazy"
-                    width="20"
-                    src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                    srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                    alt=""
-                  />
-                  {option.label} ({option.code}) +{option.phone}
-                </Box>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Choose a country"
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: "new-password", // disable autocomplete and autofill
-                  }}
-                />
-              )}
-            />
+            <div className="w-full">
+              <TextField
+                sx={{ fontSize: 12, width: "100%" }}
+                id="outlined-password-input"
+                label="Country"
+                type="text"
+                onBlur={formik.handleBlur("country")}
+                onChange={formik.handleChange("country")}
+                value={formik.values.country}
+              />
+              {formik.touched.country && formik.errors.country ? (
+                <div className="error">
+                  <p>{formik.errors.country}</p>
+                </div>
+              ) : null}
+            </div>
 
-            <div className="flex items-center gap-4">
-              <TextField
-                sx={{ fontSize: 12 }}
-                id="outlined-password-input"
-                label="First name (optional)"
-                type="text"
-              />
-              <TextField
-                sx={{ fontSize: 12 }}
-                id="outlined-password-input"
-                label="Last name"
-                type="text"
-              />
+            <div className="w-full flex gap-4">
+              <div className="w-full">
+                <TextField
+                  sx={{ fontSize: 12, width: "100%" }}
+                  id="outlined-password-input"
+                  label="First name"
+                  type="text"
+                  onBlur={formik.handleBlur("firstName")}
+                  onChange={formik.handleChange("firstName")}
+                  value={formik.values.firstName}
+                />
+                {formik.touched.firstName && formik.errors.firstName ? (
+                  <div className="error">
+                    <p>{formik.errors.firstName}</p>
+                  </div>
+                ) : null}
+              </div>
+              <div className="w-full">
+                <TextField
+                  sx={{ fontSize: 12, width: "100%" }}
+                  id="outlined-password-input"
+                  label="Last name"
+                  type="text"
+                  onBlur={formik.handleBlur("lastName")}
+                  onChange={formik.handleChange("lastName")}
+                  value={formik.values.lastName}
+                />
+                {formik.touched.lastName && formik.errors.lastName ? (
+                  <div className="error">
+                    <p>{formik.errors.lastName}</p>
+                  </div>
+                ) : null}
+              </div>
             </div>
 
             <div>
-              <TextField
-                sx={{ fontSize: 12 }}
-                id="outlined-password-input"
-                label="Address"
-                type="text"
-              />
+              <div>
+                <TextField
+                  sx={{ fontSize: 12 }}
+                  id="outlined-password-input"
+                  label="Address"
+                  type="text"
+                  onBlur={formik.handleBlur("address")}
+                  onChange={formik.handleChange("address")}
+                  value={formik.values.address}
+                />
+                {formik.touched.address && formik.errors.address ? (
+                  <div className="error mb-2">
+                    <p>{formik.errors.address}</p>
+                  </div>
+                ) : null}
+              </div>
               <div className="flex items-center gap-2">
                 <img className="w-5 h-5" src={infoIcon} alt="" />
                 <p>Add a house number if you have one</p>
               </div>
             </div>
 
-            <TextField
-              sx={{ fontSize: 12 }}
-              id="outlined-password-input"
-              label="Apartement, suite, etc. (optional)"
-              type="text"
-            />
+            <div>
+              <TextField
+                sx={{ fontSize: 12 }}
+                id="outlined-password-input"
+                label="Apartement, suite, etc. (optional)"
+                type="text"
+                onBlur={formik.handleBlur("other")}
+                onChange={formik.handleChange("other")}
+                value={formik.values.other}
+              />
+              {formik.touched.other && formik.errors.other ? (
+                <div className="error">
+                  <p>{formik.errors.other}</p>
+                </div>
+              ) : null}
+            </div>
 
             <div className="flex items-center gap-4">
-              <TextField
-                sx={{ fontSize: 12 }}
-                id="outlined-password-input"
-                label="City"
-                type="text"
-              />{" "}
-              <TextField
-                sx={{ fontSize: 12 }}
-                id="outlined-password-input"
-                label="State"
-                type="text"
-              />
-              <TextField
-                sx={{ fontSize: 12 }}
-                id="outlined-password-input"
-                label="ZIP code"
-                type="text"
-              />
+              <div className="w-full">
+                <TextField
+                  sx={{ fontSize: 12 }}
+                  id="outlined-password-input"
+                  label="City"
+                  type="text"
+                  onBlur={formik.handleBlur("city")}
+                  onChange={formik.handleChange("city")}
+                  value={formik.values.city}
+                />
+                {formik.touched.city && formik.errors.city ? (
+                  <div className="error">
+                    <p>{formik.errors.city}</p>
+                  </div>
+                ) : null}
+              </div>
+              <div className="w-full">
+                <TextField
+                  sx={{ fontSize: 12 }}
+                  id="outlined-password-input"
+                  label="State"
+                  type="text"
+                  onBlur={formik.handleBlur("state")}
+                  onChange={formik.handleChange("state")}
+                  value={formik.values.state}
+                />
+                {formik.touched.state && formik.errors.state ? (
+                  <div className="error">
+                    <p>{formik.errors.state}</p>
+                  </div>
+                ) : null}
+              </div>
+              <div className="w-full">
+                <TextField
+                  sx={{ fontSize: 12 }}
+                  id="outlined-password-input"
+                  label="ZIP code"
+                  type="number"
+                  onBlur={formik.handleBlur("zipCode")}
+                  onChange={formik.handleChange("zipCode")}
+                  value={formik.values.zipCode}
+                />
+                {formik.touched.zipCode && formik.errors.zipCode ? (
+                  <div className="error">
+                    <p>{formik.errors.zipCode}</p>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
         </Box>
-      </div>
 
-      <div className="flex items-center justify-between my-4">
-        <Link to={`/cart`} className="flex items-center gap-2">
-          <img
-            className="w-4 h-4"
-            src={arrowLeft}
-            alt="Return to information"
-          />
-          <p className="text-sm text-gray/[.8]">Return to Cart</p>
-        </Link>
+        <div className="flex items-center justify-between my-4">
+          <Link to={`/cart`} className="flex items-center gap-2">
+            <img
+              className="w-4 h-4"
+              src={arrowLeft}
+              alt="Return to information"
+            />
+            <p className="text-sm text-gray/[.8]">Return to Cart</p>
+          </Link>
 
-        <Link
-          to="/cart/checkout/shipping"
-          className="p-4 text-white bg-red-600 rounded-md text-sm"
-        >
-          Continue to shipping
-        </Link>
-      </div>
+          <button
+            type="submit"
+            className="p-4 text-white bg-red-600 rounded-md text-sm"
+          >
+            Continue to shipping
+          </button>
+        </div>
+      </form>
     </div>
   )
 }

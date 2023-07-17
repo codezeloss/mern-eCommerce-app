@@ -90,10 +90,10 @@ function PaymentInfos() {
           Select the address that matches your card or payment method.
         </p>
 
-        <div className="flex w-full flex-col border-[1px] border-gray/[.1] rounded-md text-sm text-gray/[.8] my-4">
+        <div className="flex flex-col w-full border-[1px] border-gray/[.1] rounded-md text-sm text-gray/[.8] my-4">
           <div className="flex items-center gap-3 pb-4 border-b border-b-gray/[.1] p-4">
             <input
-              className="bg-primary text-primary"
+              className="w-fit bg-primary text-primary"
               type="checkbox"
               name=""
               id=""
@@ -103,7 +103,7 @@ function PaymentInfos() {
 
           <div className="flex items-center gap-3 p-4">
             <input
-              className="bg-primary text-primary"
+              className="w-fit bg-primary text-primary"
               type="checkbox"
               name=""
               id=""

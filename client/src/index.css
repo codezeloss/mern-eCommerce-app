@@ -39,6 +39,6 @@ a {
     }
 
     .error {
-        @apply text-xs font-bold text-red-400 mt-1
+        @apply text-xs font-bold text-red-400 my-1
     }
 }
