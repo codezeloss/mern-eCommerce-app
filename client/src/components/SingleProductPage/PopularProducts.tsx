@@ -9,10 +9,12 @@ function PopularProducts() {
         <div className="grid grid-cols-5 gap-2">
           {productData.map((product) => (
             <Product
+              productId={""}
               src={product.image}
               brand={product.brand}
               title={product.title}
               price={product.price}
+              totalRating={5}
             />
           ))}
         </div>
