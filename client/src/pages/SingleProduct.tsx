@@ -37,9 +37,11 @@ function SingleProduct() {
 
   // ** Check if the current Product is already added to the cart
   useEffect(() => {
-    for (let i = 0; i < cartState.length; i++) {
-      if (productId === cartState[i]?.productId?._id) {
-        setAlreadyAdded(true)
+    if (cartState) {
+      for (let i = 0; i < cartState.length; i++) {
+        if (productId === cartState[i]?.productId?._id) {
+          setAlreadyAdded(true)
+        }
       }
     }
   }, [])
@@ -61,8 +63,12 @@ function SingleProduct() {
       }
       // @ts-ignore
       dispatch(addProductToUserCart(data))
-      toast.success("Product added to your Cart!")
-      navigate("/cart")
+      if (cartState) {
+        toast.success("Product added to your Cart!")
+        navigate("/cart")
+      } else {
+        navigate("/account")
+      }
     }
   }
 

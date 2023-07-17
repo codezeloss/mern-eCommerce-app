@@ -18,6 +18,7 @@ function Header() {
   const [totalAmount, setTotalAmount] = useState(0)
 
   // ** RTK - User cart state
+  const userState = useSelector((state: any) => state.auth.user)
   const userCartState = useSelector((state: any) => state.auth.userCart)
 
   // ** Get user cart
@@ -99,10 +100,12 @@ function Header() {
                 text_b="Wishlist"
               />
               <HeaderLinks
-                path="account"
+                path={`${userState ? "" : "account"}`}
                 src={user}
-                text_t="Log in"
-                text_b="My Account"
+                text_t={`${userState ? "Welcome" : "Login"}`}
+                text_b={`${
+                  userState ? userState.lastname.toUpperCase() : "My Account"
+                }`}
               />
               <HeaderCart
                 path="cart"

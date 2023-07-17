@@ -15,6 +15,7 @@ export interface State {
 const getCustomerFromLocalStorage = localStorage.getItem("user") || null
 
 const initialState: State = {
+  // @ts-ignore
   user: JSON.parse(getCustomerFromLocalStorage),
   isError: false,
   isSuccess: false,
@@ -104,6 +105,19 @@ export const updateProductCartQuantity = createAsyncThunk(
   async (cartDetails: any, thunkAPI) => {
     try {
       return await authService.updateProductQuantityFromCart(cartDetails)
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
+
+// ** CREATE order
+export const createNewOrder = createAsyncThunk(
+  "auth/new-order",
+  async (orderDetails: any, thunkAPI) => {
+    try {
+      return await authService.createOrder(orderDetails)
     } catch (e) {
       // @ts-ignore
       return thunkAPI.rejectWithValue(e)
@@ -241,6 +255,23 @@ export const authSlice = createSlice({
         state.message = "success"
       })
       .addCase(updateProductCartQuantity.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(createNewOrder.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(createNewOrder.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.createdOrder = action.payload
+        state.message = "success"
+      })
+      .addCase(createNewOrder.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.isSuccess = false

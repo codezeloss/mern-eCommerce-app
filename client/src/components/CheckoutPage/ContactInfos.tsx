@@ -6,8 +6,11 @@ import infoIcon from "../../../public/assets/icons/info-icon.svg"
 import arrowLeft from "../../../public/assets/icons/arrow-left.svg"
 import { number, object, string } from "yup"
 import { useFormik } from "formik"
-import { useDispatch } from "react-redux"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { config } from "../../utils/axios_config"
+import { createNewOrder } from "../../features/user/userSlice"
 
 // ** yup Validation
 let shippingSchema = object({
@@ -24,7 +27,114 @@ let shippingSchema = object({
 function ContactInfos() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [totalAmount, setTotalAmount] = useState(null)
   const [shippingInfos, setShippingInfos] = useState(null)
+  const [paymentInfos, setPaymentInfos] = useState({
+    razorpayPaymentId: "",
+    razorpayOrderId: "",
+  })
+  const [cartProductState, setCartProductState] = useState([])
+
+  // ** RTK - Cart State
+  const cartState = useSelector((state: any) => state.auth.userCart)
+
+  // ** Load script
+  const loadScript = (src: any) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script")
+      script.src = src
+      script.onload = () => {
+        resolve(true)
+      }
+      script.onerror = () => {
+        resolve(false)
+      }
+      document.body.appendChild(script)
+    })
+  }
+
+  // **
+  useEffect(() => {
+    let items: any[] = []
+    for (let i = 0; i < cartState.length; i++) {
+      items.push({
+        product: cartState[i].product_id,
+        quantity: cartState[i].quantity,
+        color: cartState[i].color._id,
+        price: cartState[i].price,
+      })
+      // @ts-ignore
+      setCartProductState(items)
+    }
+  }, [])
+
+  // ** Checkout handler
+  const checkoutHandler = async () => {
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
+    if (!res) {
+      alert("Razorpay SDK failed to load!")
+      return
+    }
+
+    const result = await axios.post(
+      "http://localhost:4000/api/user/order/checkout",
+      { amount: totalAmount },
+      config,
+    )
+    if (!result) {
+      alert("Something went wrong!")
+      return
+    }
+
+    const { amount, id: order_id, currency } = result.data.order
+    const options = {
+      key: "rzp_test_ekpGjQU242wyfA",
+      amount: amount,
+      currency: currency,
+      name: "codezeloss Corp.",
+      description: "Test Transaction",
+      order_id: order_id,
+      handler: async function (response: any) {
+        const data = {
+          orderCreationId: order_id,
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpayOrderId: response.razorpay_order_id,
+        }
+
+        const result = await axios.post(
+          "http://localhost:4000/api/user/order/paymentVerification",
+          data,
+          config,
+        )
+
+        setPaymentInfos({
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpayOrderId: response.razorpay_order_id,
+        })
+
+        const orderData = {
+          totalPrice: totalAmount,
+          totalPriceAfterDiscount: totalAmount,
+          orderItems: cartProductState,
+          paymentInfos,
+          shippingInfos,
+        }
+        // @ts-ignore
+        dispatch(createNewOrder(orderData))
+      },
+      prefill: {
+        name: "codezeloss",
+        email: "codezeloss@example.com",
+        contact: "9999999999",
+      },
+      notes: {
+        address: "codezeloss Corporate Office",
+      },
+      theme: {
+        color: "#61dafb",
+      },
+    }
+  }
 
   // ** Formik
   const formik = useFormik({
@@ -41,7 +151,6 @@ function ContactInfos() {
     validationSchema: shippingSchema,
     onSubmit: (values: any) => {
       setShippingInfos(values)
-      console.log(shippingInfos)
       navigate("/cart/checkout/shipping")
       formik.resetForm()
     },

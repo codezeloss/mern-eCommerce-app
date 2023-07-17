@@ -19,7 +19,7 @@ function Cart() {
     dispatch(getUserCart())
   }, [])
 
-  // ** Get Total cart Amount
+  // ** Calculate Total cart Amount
   useEffect(() => {
     let sum = 0
     if (userCartState) {

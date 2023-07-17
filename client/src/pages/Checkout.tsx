@@ -7,7 +7,6 @@ import CheckoutBreadCrumb from "../components/CheckoutPage/CheckoutBreadCrumb"
 import { useDispatch, useSelector } from "react-redux"
 import React, { useEffect, useState } from "react"
 import { getUserCart } from "../features/user/userSlice"
-import axios from "axios"
 
 function Checkout() {
   const { pathname } = useLocation()
@@ -35,40 +34,6 @@ function Checkout() {
       setTotalAmount(0)
     }
   }, [cartState])
-
-  // ** Load script
-  const loadScript = (src: any) => {
-    return new Promise((resolve) => {
-      const script = document.createElement("root")
-      script.src = src
-      script.onload = () => {
-        resolve(true)
-      }
-      script.onerror = () => {
-        resolve(false)
-      }
-      document.body.appendChild(script)
-    })
-  }
-
-  // ** Checkout handler
-  const checkoutHandler = async () => {
-    const res = await loadScript("https://checkout.razorpay.com/vi/checkout.js")
-    if (!res) {
-      alert("Razorpay SDK failed to load!")
-      return
-    }
-
-    const result = await axios.post(
-      "http://localhost:4000/api/user/order/checkout",
-    )
-    if (!result) {
-      alert("Something went wrong!")
-      return
-    }
-
-    const { amount, id: order_id, currency } = result.data
-  }
 
   return (
     <>

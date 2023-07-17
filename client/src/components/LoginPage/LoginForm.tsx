@@ -30,19 +30,18 @@ function LoginForm() {
     onSubmit: (values) => {
       // @ts-ignore
       dispatch(loginUser(values))
+      setTimeout(() => {
+        // ** Toast Notification & Redirect user
+        if (isSuccess && user) {
+          toast.success("Login successfully!", {})
+          navigate("/")
+        }
+        if (isError) {
+          toast.error("Something went wrong!!", {})
+        }
+      }, 300)
     },
   })
-
-  // ** Toast Notification
-  useEffect(() => {
-    if (isSuccess && user) {
-      toast.success("Login successfully!", {})
-      navigate("/")
-    }
-    if (isError) {
-      toast.error("Something went wrong!!", {})
-    }
-  }, [isSuccess, isError, isLoading, user])
 
   return (
     <div className="py-10 mx-auto">
