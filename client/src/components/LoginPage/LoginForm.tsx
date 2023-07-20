@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useFormik } from "formik"
 import { loginUser } from "../../features/user/userSlice"
@@ -8,7 +7,7 @@ import { object, string } from "yup"
 
 // ** yup Validation
 let signupSchema = object({
-  email: string().required("Email is required"),
+  email: string().email("Email should be valid").required("Email is required"),
   password: string().required("Password is required"),
 })
 
@@ -84,7 +83,9 @@ function LoginForm() {
           ) : null}
         </label>
         <Link to="/account/forgot-password">
-          <p className="text-xs font-semibold mb-6">Forgot your password?</p>
+          <p className="text-xs font-semibold mb-6 hover:underline">
+            Forgot your password?
+          </p>
         </Link>
 
         <div className="flex items-center justify-center gap-4">

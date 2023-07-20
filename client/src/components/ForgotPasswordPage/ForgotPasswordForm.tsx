@@ -1,21 +1,52 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { useFormik } from "formik"
+import { forgotPasswordToken, loginUser } from "../../features/user/userSlice"
+import { toast } from "react-toastify"
+import { useDispatch, useSelector } from "react-redux"
+import { object, string } from "yup"
+
+// ** yup Validation
+let signupSchema = object({
+  email: string().email("Email should be valid").required("Email is required"),
+})
 
 function ForgotPasswordForm() {
-  const [email, setEmail] = useState("")
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  // **
-  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  // ** RTK - User state
+  const userState = useSelector((state: any) => state.auth)
 
-    setEmail("")
+  // ** Toast Notification & Redirect user
+  if (!!userState) {
+    const { isError, isSuccess, isLoading, passwordToken } = userState
+    if (isSuccess && passwordToken) {
+      toast.success("Email sent successfully!", {})
+      navigate("/")
+    }
+    if (isError) {
+      toast.error("Something went wrong!!", {})
+    }
   }
+
+  // ** Formik
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: signupSchema,
+    onSubmit: (values) => {
+      // @ts-ignore
+      dispatch(forgotPasswordToken(values))
+    },
+  })
 
   return (
     <div className="py-10 mx-auto">
       <form
         className="bg-white px-6 py-10 rounded-md shadow-sm w-[450px] mx-auto"
-        onSubmit={onSubmitForm}
+        onSubmit={formik.handleSubmit}
       >
         <h2 className="mb-2 text-center text-xl font-bold">
           Reset Your Password
@@ -25,23 +56,29 @@ function ForgotPasswordForm() {
           We will send you an email to reset your password
         </p>
 
-        <label htmlFor="Email">
+        <div className="mb-3">
           <input
-            className="mb-8 w-full"
+            className="w-full"
             name="email"
             type="text"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onBlur={formik.handleBlur("email")}
+            onChange={formik.handleChange("email")}
+            value={formik.values.email}
           />
-        </label>
+          {formik.touched.email && formik.errors.email ? (
+            <div className="error">
+              <p>{formik.errors.email}</p>
+            </div>
+          ) : null}
+        </div>
 
-        <div className="flex flex-col items-center justify-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-1">
           <button type="submit" className="primary-btn">
             Submit
           </button>
           <Link to="/account">
-            <p className="block w-fit text-primary uppercase rounded-full px-4 pt-2 text-primary text-xs">
+            <p className="block w-fit uppercase rounded-full px-4 pt-2 text-primary text-xs">
               Cancel
             </p>
           </Link>

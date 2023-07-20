@@ -17,7 +17,7 @@ const uniqid = require("uniqid");
 // @route  POST /register
 // @access Private
 const createUser = asyncHandler(async (req, res) => {
-  const { firstname, lastname, email, phone, password } = req.body;
+  const { firstname, lastname, email, mobile, password } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -261,7 +261,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const { id } = req.user;
   validateMongodbId(id);
 
-  const { firstname, lastname, email, phone } = req.body;
+  const { firstname, lastname, email, mobile } = req.body;
 
   try {
     const user = await User.findByIdAndUpdate(
@@ -270,7 +270,7 @@ const updateUser = asyncHandler(async (req, res) => {
         firstname,
         lastname,
         email,
-        phone,
+        mobile,
       },
       { new: true }
     );
@@ -346,23 +346,23 @@ const updatePassword = asyncHandler(async (req, res) => {
 // @access Private
 const forgotPasswordToken = asyncHandler(async (req, res) => {
   const { email } = req.body;
+
   const user = await User.findOne({ email });
   if (!user) throw new Error("User not found with this email!");
 
   try {
     const token = await user.createPasswordResetToken();
     await user.save();
-    const resetURL = `Hi! Please follow this link to reset your password. This link is valid till 10 mins from now. <a href="http://localhost:4000/api/user/reset-password/${token}">Click here</a>`;
+    const resetURL = `Hi! Please follow this link to reset your password. This link is valid till 10 mins from now. <a href="http://localhost:5173/account/reset-password/${token}">Click here</a>`;
     const data = {
       to: email,
-      text: "Hey user!",
+      text: "Hey!",
       subject: "Forgot password link",
       html: resetURL,
     };
     sendEmail(data);
     res.json(token);
   } catch (error) {
-    50;
     throw new Error(error);
   }
 });
@@ -509,6 +509,48 @@ const createOrder = asyncHandler(async (req, res) => {
     throw new Error(error);
   }
 });
+
+// @desc   Get My Orders
+// @route  GET /get-my-orders
+// @access Private
+const getMyOrders = asyncHandler(async (req, res) => {
+  const { id } = req.user;
+
+  try {
+    const orders = await Order.find({ user: id })
+      .populate("user")
+      .populate("orderItems.product")
+      .populate("orderItems.color");
+    res.json(orders);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+module.exports = {
+  createUser,
+  loginUser,
+  loginAdmin,
+  getAllUsers,
+  getUser,
+  deleteUser,
+  updateUser,
+  blockUser,
+  unblockUser,
+  handleRefreshToken,
+  logoutUser,
+  updatePassword,
+  forgotPasswordToken,
+  resetPassword,
+  getWishlist,
+  saveAddress,
+  userCart,
+  getUserCart,
+  removeProductFromCart,
+  updateCartProductQuantity,
+  createOrder,
+  getMyOrders,
+};
 
 {
   /*
@@ -675,30 +717,6 @@ const createOrder = asyncHandler(async (req, res) => {
   });
 */
 }
-
-module.exports = {
-  createUser,
-  loginUser,
-  loginAdmin,
-  getAllUsers,
-  getUser,
-  deleteUser,
-  updateUser,
-  blockUser,
-  unblockUser,
-  handleRefreshToken,
-  logoutUser,
-  updatePassword,
-  forgotPasswordToken,
-  resetPassword,
-  getWishlist,
-  saveAddress,
-  userCart,
-  getUserCart,
-  removeProductFromCart,
-  updateCartProductQuantity,
-  createOrder,
-};
 
 {
   /*

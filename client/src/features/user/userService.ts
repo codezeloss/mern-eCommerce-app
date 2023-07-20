@@ -58,6 +58,27 @@ const createOrder = async (orderDetails: any) => {
   return response.data
 }
 
+const userOrders = async () => {
+  const response = await axios.get(`${base_url}user/get-my-orders`, config)
+  return response.data
+}
+
+const updateUser = async (userData: any) => {
+  const response = await axios.put(
+    `${base_url}user/edit-user`,
+    userData,
+    config,
+  )
+  return response.data
+}
+
+const forgotPassToken = async (data: any) => {
+  const response = await axios.post(
+    `${base_url}user/forgot-password-token`,
+    data,
+  )
+  return response.data
+}
 const authService = {
   register,
   login,
@@ -67,5 +88,8 @@ const authService = {
   removeProductFromCart,
   updateProductQuantityFromCart,
   createOrder,
+  userOrders,
+  updateUser,
+  forgotPassToken,
 }
 export default authService

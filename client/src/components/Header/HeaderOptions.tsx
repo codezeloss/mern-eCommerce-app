@@ -22,6 +22,9 @@ function HeaderOptions() {
             <Link className="uppercase text-xs" to="/store">
               Our Store
             </Link>
+            <Link className="uppercase text-xs" to="/orders">
+              My Orders
+            </Link>
             <Link className="uppercase text-xs" to="/blogs">
               Blogs
             </Link>

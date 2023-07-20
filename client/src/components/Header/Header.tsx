@@ -1,20 +1,21 @@
-import { Link } from "react-router-dom"
-import searchGlass from "../../../public/assets/icons/search-glass.svg"
-import arrowPath from "../../../public/assets/icons/arrow-path.svg"
-import heart from "../../../public/assets/icons/heart.svg"
-import user from "../../../public/assets/icons/user.svg"
-import cart from "../../../public/assets/icons/cart-icon.svg"
+import { Link, useNavigate } from "react-router-dom"
+import searchGlass from "/public/assets/icons/search-glass.svg"
+import arrowPath from "/public/assets/icons/arrow-path.svg"
+import heart from "/public/assets/icons/heart.svg"
+import user from "/public/assets/icons/user.svg"
+import cart from "/public/assets/icons/cart-icon.svg"
 import ChevronDown from "../../../public/assets/icons/ChevronDown"
-
 import HeaderLinks from "./HeaderLinks"
 import HeaderOptions from "./HeaderOptions"
 import HeaderCart from "./HeaderCart"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { getUserCart } from "../../features/user/userSlice"
+import { IoMdLogOut } from "react-icons/io"
 
 function Header() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [totalAmount, setTotalAmount] = useState(0)
 
   // ** RTK - User cart state
@@ -40,10 +41,15 @@ function Header() {
     }
   }, [userCartState])
 
+  // ** Handle User Logout
+  const handleLogout = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
   return (
     <>
       <header className="bg-primary text-white">
-        {/* */}
         <div className="border-b-[1px] border-b-white/[.2]">
           <div
             className={
@@ -99,14 +105,24 @@ function Header() {
                 text_t="Favourite"
                 text_b="Wishlist"
               />
-              <HeaderLinks
-                path={`${userState ? "" : "account"}`}
-                src={user}
-                text_t={`${userState ? "Welcome" : "Login"}`}
-                text_b={`${
-                  userState ? userState.lastname.toUpperCase() : "My Account"
-                }`}
-              />
+              <div className="flex items-center">
+                <HeaderLinks
+                  path={`${userState ? "profile" : "account"}`}
+                  src={user}
+                  text_t={`${userState ? "Welcome" : "Login"}`}
+                  text_b={`${
+                    userState ? userState.lastname.toUpperCase() : "My Account"
+                  }`}
+                />
+                {userState && (
+                  <button
+                    className="text-xl text-red-400 ml-2"
+                    onClick={handleLogout}
+                  >
+                    <IoMdLogOut />
+                  </button>
+                )}
+              </div>
               <HeaderCart
                 path="cart"
                 src={cart}
@@ -117,7 +133,6 @@ function Header() {
           </div>
         </div>
 
-        {/* */}
         <HeaderOptions />
       </header>
     </>

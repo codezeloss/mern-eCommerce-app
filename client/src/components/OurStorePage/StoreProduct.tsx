@@ -72,7 +72,7 @@ function StoreProduct({
 
       <div>
         <p className="text-red-600 mb-3 text-xs">{brand}</p>
-        <Link to="/products/:id">
+        <Link to={`/product/${productId}`}>
           <h3 className="text-sm font-bold mb-2 leading-5 hover:underline">
             {title}
           </h3>

@@ -22,6 +22,7 @@ const {
   removeProductFromCart,
   updateCartProductQuantity,
   createOrder,
+  getMyOrders,
 } = require("../controllers/userController");
 const {
   checkout,
@@ -37,11 +38,12 @@ router.get("/wishlist", authMiddleware, getWishlist);
 router.post("/cart", authMiddleware, userCart);
 router.get("/cart", authMiddleware, getUserCart);
 router.get("/all-users", getAllUsers);
+router.get("/get-my-orders", authMiddleware, getMyOrders);
 router.post("logout", logoutUser);
 router.post("/forgot-password-token", forgotPasswordToken);
 router.get("/refresh/:id", authMiddleware, isAdmin, handleRefreshToken);
 router.get("/:id", authMiddleware, isAdmin, getUser);
-router.put("/edit-user/:id", authMiddleware, updateUser);
+router.put("/edit-user", authMiddleware, updateUser);
 router.put("/save-address", authMiddleware, saveAddress);
 router.put("/block-user/:id", authMiddleware, isAdmin, blockUser);
 router.put("/unblock-user/:id", authMiddleware, isAdmin, unblockUser);

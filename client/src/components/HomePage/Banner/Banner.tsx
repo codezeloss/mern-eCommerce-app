@@ -23,7 +23,7 @@ function Banner({
           </button>
         </div>
 
-        <div className="w-full h-[320px] absolute r-0 t-0 -z-10">
+        <div className="w-full h-[320px] absolute right-0 top-0 -z-10">
           <img
             className="w-full h-[320px] rounded-md object-cover"
             src={img_src}

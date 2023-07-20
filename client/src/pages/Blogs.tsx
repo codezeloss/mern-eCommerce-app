@@ -27,7 +27,7 @@ function Blogs() {
 
   return (
     <>
-      <div>
+      <main>
         <div className="flex items-center justify-center">
           <BreadCrumb path="/blogs" title="News" />
         </div>
@@ -54,7 +54,7 @@ function Blogs() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }

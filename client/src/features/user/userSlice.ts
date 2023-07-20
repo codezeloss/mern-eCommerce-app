@@ -124,6 +124,45 @@ export const createNewOrder = createAsyncThunk(
     }
   },
 )
+
+// ** GET User Orders
+export const getUserOrders = createAsyncThunk(
+  "auth/get-user-orders",
+  async (thunkAPI) => {
+    try {
+      return await authService.userOrders()
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
+
+// ** PUT User profile infos
+export const updateUserProfile = createAsyncThunk(
+  "auth/update-profile",
+  async (userData: any, thunkAPI) => {
+    try {
+      return await authService.updateUser(userData)
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
+
+// ** POST Forgot-password token
+export const forgotPasswordToken = createAsyncThunk(
+  "auth/forgot-password-token",
+  async (data: any, thunkAPI) => {
+    try {
+      return await authService.forgotPassToken(data)
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
 // **
 
 export const authSlice = createSlice({
@@ -272,6 +311,57 @@ export const authSlice = createSlice({
         state.message = "success"
       })
       .addCase(createNewOrder.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(getUserOrders.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getUserOrders.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.userOrders = action.payload
+        state.message = "success"
+      })
+      .addCase(getUserOrders.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.user = action.payload
+        state.message = "success"
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(forgotPasswordToken.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(forgotPasswordToken.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.passwordToken = action.payload
+        state.message = "success"
+      })
+      .addCase(forgotPasswordToken.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.isSuccess = false

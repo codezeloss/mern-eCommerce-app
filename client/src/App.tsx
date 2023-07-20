@@ -17,6 +17,8 @@ import Checkout from "./pages/Checkout"
 import ResetPassword from "./pages/ResetPassword"
 import { PrivateRoutes } from "./routing/privateRoutes"
 import { OpenRoutes } from "./routing/openRoutes"
+import Orders from "./pages/Orders"
+import Profile from "./pages/Profile"
 
 function App() {
   return (
@@ -50,7 +52,10 @@ function App() {
               path="/account/forgot-password"
               element={<ForgotPassword />}
             />
-            <Route path="/account/reset-password" element={<ResetPassword />} />
+            <Route
+              path="/account/reset-password/:token"
+              element={<ResetPassword />}
+            />
             <Route
               path="/account/register"
               element={
@@ -65,6 +70,22 @@ function App() {
               element={
                 <PrivateRoutes>
                   <Cart />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <PrivateRoutes>
+                  <Orders />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoutes>
+                  <Profile />
                 </PrivateRoutes>
               }
             />
