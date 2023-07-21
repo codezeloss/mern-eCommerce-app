@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import heart from "../../../public/assets/icons/heart-black.svg"
+import heart from "../../assets/icons/heart-black.svg"
 import Rating from "@mui/material/Rating"
 import { addProductToWishList } from "../../features/product/productSlice"
 import { useDispatch } from "react-redux"
@@ -38,7 +38,7 @@ function StoreProduct({
 
   return (
     <div
-      className={`w-full bg-white shadow-sm rounded-md  ${
+      className={`w-full bg-white shadow-sm rounded-md ${
         grid === 1 ? "flex items-center gap-4 p-4" : "px-4 pb-6 pt-2.5"
       }`}
     >
@@ -61,7 +61,7 @@ function StoreProduct({
         <div>
           <img
             className={`w-full h-[250px] object-cover text-sm cursor-pointer ${
-              grid === 1 ? "w-[250px] h-[100%]" : ""
+              grid === 1 ? "min-w-[250px] w-[250px] h-[100%]" : ""
             }`}
             src={src}
             alt="FamousProduct"

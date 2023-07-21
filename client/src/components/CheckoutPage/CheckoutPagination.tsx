@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import arrowLeft from "../../../public/assets/icons/arrow-left.svg"
+import arrowLeft from "../../assets/icons/arrow-left.svg"
 
 interface Props {
   path: string

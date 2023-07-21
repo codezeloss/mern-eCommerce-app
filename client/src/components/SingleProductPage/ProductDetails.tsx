@@ -1,9 +1,8 @@
 import Rating from "@mui/material/Rating"
-import heartIcon from "/public/assets/icons/heart-black.svg"
-import copyIcon from "/public/assets/icons/copy-icon.svg"
-import compareIcon from "/public/assets/icons/arrow-right-left.svg"
-import React, { useEffect, useState } from "react"
-import { toast } from "react-toastify"
+import heartIcon from "../../assets/icons/heart-black.svg"
+import copyIcon from "../../assets/icons/copy-icon.svg"
+import compareIcon from "../../assets/icons/arrow-right-left.svg"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 
 interface Props {

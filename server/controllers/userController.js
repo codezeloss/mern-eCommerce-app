@@ -409,7 +409,6 @@ const getWishlist = asyncHandler(async (req, res) => {
 const userCart = asyncHandler(async (req, res) => {
   const { productId, color, quantity, price } = req.body;
   const { id } = req.user;
-  validateMongodbId(id);
 
   try {
     let newCart = await new Cart({

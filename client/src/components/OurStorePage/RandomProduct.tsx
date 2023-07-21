@@ -1,10 +1,7 @@
-import { useState } from "react"
-import speaker from "../../../public/assets/images/speaker.jpg"
+import speaker from "../../assets/images/speaker.jpg"
 import Rating from "@mui/material/Rating"
 
 function RandomProduct() {
-  const [value, setValue] = useState(2)
-
   return (
     <div className="flex items-center gap-2 py-4 border-b border-b-gray/[.1]">
       <div>
@@ -18,10 +15,8 @@ function RandomProduct() {
         <Rating
           sx={{ fontSize: 18, mb: 1 }}
           name="simple-controlled"
-          value={value}
-          onChange={(e: any) => {
-            setValue(e.target.value)
-          }}
+          value={3}
+          readOnly
         />
         <p className="font-semibold text-sm">$100.00</p>
       </div>

@@ -1,28 +1,30 @@
 import { useState } from "react"
 import Rating from "@mui/material/Rating"
 
-function UserReview() {
-  const [value, setValue] = useState(2)
+interface Props {
+  stars: number
+  customer: string
+  postedAt: string
+  comment: string
+}
+
+function UserReview({ stars, customer, postedAt, comment }: Props) {
+  const [value, setValue] = useState(3)
 
   return (
     <div className="flex items-center justify-between border-t-[1px] border-t-gray/[.1] py-5">
       <div>
+        <p className="text-sm font-bold mb-0.5 italic">
+          {customer} <span className="font-light not-italic"> on </span>
+          {postedAt}
+        </p>
         <Rating
           sx={{ fontSize: 14 }}
           name="simple-controlled"
-          value={value}
-          onChange={(e: any) => {
-            setValue(e.target.value)
-          }}
+          value={stars}
+          readOnly
         />
-        <p className="text-sm font-bold">Good</p>
-        <p className="text-sm font-bold mb-2 italic">
-          Anas Ali <span className="font-light not-italic">on</span> Aug 29,
-          2022
-        </p>
-        <p className="text-xs text-gray/[.6] mb-3">
-          Description ergher regh ergh erhg ethytj tyjyuk tuj rhe gergeg
-        </p>
+        <p className="text-xs text-gray/[.6]">{comment}</p>
       </div>
 
       <div className="flex flex-col gap-14">
@@ -30,7 +32,7 @@ function UserReview() {
         <div>
           <button
             type="button"
-            className="text-[10px] hover:underline text-gray/[.4]"
+            className="text-[10px] hover:underline text-gray/[.4] mb-2"
           >
             Report as Inappropriate
           </button>

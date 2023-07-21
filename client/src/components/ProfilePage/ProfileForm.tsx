@@ -4,7 +4,6 @@ import React, { useState } from "react"
 import { object, string } from "yup"
 import { useFormik } from "formik"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import { updateUserProfile } from "../../features/user/userSlice"
 import { toast } from "react-toastify"
 import { FiEdit } from "react-icons/fi"
@@ -19,24 +18,23 @@ let profileSchema = object({
 
 function ProfileForm() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const [edit, setEdit] = useState(true)
 
   // ** RTK - User state
-  const userState = useSelector((state: any) => state.auth.user)
+  const userState = useSelector((state: any) => state.auth)
   const { isError, isSuccess, isLoading, user } = userState
 
   // ** Formik
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstname: "" || (userState && userState?.firstname),
-      lastname: "" || (userState && userState?.lastname),
-      email: "" || (userState && userState?.email),
-      mobile: "" || (userState && userState?.mobile),
+      firstname: "" || user?.firstname,
+      lastname: "" || user?.lastname,
+      email: "" || user?.email,
+      mobile: "" || user?.mobile,
     },
     validationSchema: profileSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: any) => {
       // @ts-ignore
       dispatch(updateUserProfile(values))
       setEdit(true)

@@ -1,11 +1,15 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import Rating from "@mui/material/Rating"
 import UserReview from "./UserReview"
 import ReviewForm from "./ReviewForm"
+import { useDispatch, useSelector } from "react-redux"
 
 function Reviews() {
-  const [value, setValue] = useState(0)
+  const dispatch = useDispatch()
   const [writeReview, setWriteReview] = useState(false)
+
+  // ** RTK
+  const productState = useSelector((state: any) => state.product.product)
 
   return (
     <div>
@@ -13,15 +17,13 @@ function Reviews() {
       <div className="bg-white rounded-md shadow-sm p-7">
         <div className="flex items-center justify-between">
           <div>
-            <p>Customer Reviews</p>
+            <p className="text-lg">Customer Reviews</p>
             <div className="flex items-center gap-2">
               <Rating
                 sx={{ fontSize: 18 }}
                 name="simple-controlled"
-                value={value}
-                onChange={(e: any) => {
-                  setValue(e.target.value)
-                }}
+                value={5}
+                readOnly
               />
               <p className="text-gray/[.7] text-xs my-2">Based on 2 reviews</p>
             </div>
@@ -30,7 +32,6 @@ function Reviews() {
             type="button"
             className="text-gray/[.7] text-xs font-bold hover:underline"
             onClick={() => {
-              console.log(writeReview)
               setWriteReview(!writeReview)
             }}
           >
@@ -41,9 +42,17 @@ function Reviews() {
         {writeReview && <ReviewForm />}
 
         <div className="my-4">
-          <UserReview />
-          <UserReview />
-          <UserReview />
+          {productState &&
+            productState.ratings.map((product: any, index: React.Key) => (
+              <div key={index}>
+                <UserReview
+                  stars={product?.star}
+                  customer={"Customer here"}
+                  postedAt={"Date here"}
+                  comment={product?.comment}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>

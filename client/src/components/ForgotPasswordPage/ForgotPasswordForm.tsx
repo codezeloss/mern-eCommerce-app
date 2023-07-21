@@ -18,18 +18,6 @@ function ForgotPasswordForm() {
   // ** RTK - User state
   const userState = useSelector((state: any) => state.auth)
 
-  // ** Toast Notification & Redirect user
-  if (!!userState) {
-    const { isError, isSuccess, isLoading, passwordToken } = userState
-    if (isSuccess && passwordToken) {
-      toast.success("Email sent successfully!", {})
-      navigate("/")
-    }
-    if (isError) {
-      toast.error("Something went wrong!!", {})
-    }
-  }
-
   // ** Formik
   const formik = useFormik({
     initialValues: {
@@ -39,6 +27,18 @@ function ForgotPasswordForm() {
     onSubmit: (values) => {
       // @ts-ignore
       dispatch(forgotPasswordToken(values))
+
+      // ** Toast Notification & Redirect user
+      if (!!userState?.passwordToken) {
+        const { isError, isSuccess, isLoading, passwordToken } = userState
+        if (isSuccess && passwordToken) {
+          toast.success("Email sent successfully!", {})
+          navigate("/")
+        }
+        if (isError) {
+          toast.error("Something went wrong!!", {})
+        }
+      }
     },
   })
 

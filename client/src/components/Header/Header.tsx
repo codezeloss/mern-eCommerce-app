@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom"
-import searchGlass from "/public/assets/icons/search-glass.svg"
-import arrowPath from "/public/assets/icons/arrow-path.svg"
-import heart from "/public/assets/icons/heart.svg"
-import user from "/public/assets/icons/user.svg"
-import cart from "/public/assets/icons/cart-icon.svg"
-import ChevronDown from "../../../public/assets/icons/ChevronDown"
+import searchGlass from "../../assets/icons/search-glass.svg"
+import arrowPath from "../../assets/icons/arrow-path.svg"
+import heart from "../../assets/icons/heart.svg"
+import user from "../../assets/icons/user.svg"
+import cart from "../../assets/icons/cart-icon.svg"
+import ChevronDown from "../../assets/icons/ChevronDown"
 import HeaderLinks from "./HeaderLinks"
 import HeaderOptions from "./HeaderOptions"
 import HeaderCart from "./HeaderCart"
@@ -12,15 +12,27 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { getUserCart } from "../../features/user/userSlice"
 import { IoMdLogOut } from "react-icons/io"
+import { Typeahead } from "react-bootstrap-typeahead"
+import "react-bootstrap-typeahead/css/Typeahead.css"
+import { getSingleProduct } from "../../features/product/productSlice"
+
+interface Props {
+  id: string
+  product: string
+  title: string
+}
 
 function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [totalAmount, setTotalAmount] = useState(0)
+  const [productOptions, setProductOptions] = useState<Props[]>([])
+  const [paginate, setPaginate] = useState(true)
 
   // ** RTK - User cart state
   const userState = useSelector((state: any) => state.auth.user)
   const userCartState = useSelector((state: any) => state.auth.userCart)
+  const productsState = useSelector((state: any) => state.product.products)
 
   // ** Get user cart
   useEffect(() => {
@@ -46,6 +58,20 @@ function Header() {
     localStorage.clear()
     window.location.reload()
   }
+
+  // ** Search by product
+  useEffect(() => {
+    let data: any[] = []
+    for (let i = 0; i < productsState.length; i++) {
+      const element = productsState[i]
+      data.push({
+        id: i,
+        product: element?._id,
+        title: element?.title,
+      })
+    }
+    setProductOptions(data)
+  }, [productsState])
 
   return (
     <>
@@ -79,16 +105,25 @@ function Header() {
               <h1 className="text-2xl">@Tecos.</h1>
             </Link>
 
-            <div className="w-full max-w-[600px] flex items-center h-6">
-              <input
-                className="w-full h-full text-xs px-4 py-4 rounded-l-md outline-none text-black"
-                id="search-product"
-                name="search-product"
-                type="text"
-                placeholder="Seacrh a product here..."
-              />
-              <div className="bg-[#ffa726] h-full flex items-center justify-center px-3 py-4 rounded-r-md">
-                <img className="w-4 h-4" src={searchGlass} alt={""} />
+            <div className="w-full max-w-[600px] flex items-center mx-3">
+              <div className="w-full h-full text-xs outline-none text-black">
+                <Typeahead
+                  id="pagination-example"
+                  onPaginate={() => console.log("Results paginated")}
+                  onChange={(selected: any) => {
+                    navigate(`/product/${selected[0]?.product}`)
+                    // @ts-ignore
+                    dispatch(getSingleProduct(`${selected[0]?.product}`))
+                  }}
+                  options={productOptions}
+                  labelKey={"title"}
+                  paginate={paginate}
+                  placeholder="Seacrh a product here..."
+                  dropup={true}
+                />
+              </div>
+              <div className="bg-[#ffa726] h-full flex items-center justify-center px-3 py-2.5">
+                <img className="w-4 h-4" src={searchGlass} alt="Search" />
               </div>
             </div>
 

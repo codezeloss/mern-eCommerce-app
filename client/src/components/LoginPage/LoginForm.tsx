@@ -31,7 +31,7 @@ function LoginForm() {
       dispatch(loginUser(values))
       setTimeout(() => {
         // ** Toast Notification & Redirect user
-        if (isSuccess && user) {
+        if (isSuccess && user !== null) {
           toast.success("Login successfully!", {})
           navigate("/")
         }

@@ -1,5 +1,5 @@
-import pic from "../../../../public/assets/images/tab1.jpg"
-import heart from "../../../../public/assets/icons/heart-black.svg"
+import pic from "../../../assets/images/tab1.jpg"
+import heart from "../../../assets/icons/heart-black.svg"
 import { styled } from "@mui/material/styles"
 import Box from "@mui/material/Box"
 import LinearProgress, {

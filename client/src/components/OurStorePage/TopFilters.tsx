@@ -1,33 +1,46 @@
-import gridIcon01 from "../../../public/assets/icons/gr.svg"
-import gridIcon02 from "../../../public/assets/icons/gr2.svg"
-import gridIcon03 from "../../../public/assets/icons/gr3.svg"
-import gridIcon04 from "../../../public/assets/icons/gr4.svg"
+import gridIcon01 from "../../assets/icons/gr.svg"
+import gridIcon02 from "../../assets/icons/gr2.svg"
+import gridIcon03 from "../../assets/icons/gr3.svg"
+import gridIcon04 from "../../assets/icons/gr4.svg"
+import { useState } from "react"
 
 interface Props {
   grid: number
   setGrid: any
+  sort: string
+  setSort: any
 }
 
-function TopFilters({ grid, setGrid }: Props) {
+function TopFilters({ grid, setGrid, sort, setSort }: Props) {
   return (
     <div className="w-full bg-white rounded-md shadow-sm flex items-center justify-between p-3">
       <div className="flex items-center gap-3">
         <p className="text-sm font-semibold">Sort By:</p>
         <select
-          className="w-[160px] text-xs text-gray/[.7] p-2 bg-gray/[.1] border-0"
-          name=""
+          className="w-[190px] text-sm text-gray p-2 bg-white border-[1px] rounded"
+          name="sort-products"
+          onChange={setSort}
         >
-          <option value="" className="p-2 mb-2">
-            Best Selling
+          <option value="none" className="p-2 mb-2">
+            select
           </option>
-          <option value="" className="p-2 mb-2">
-            Best Selling
+          <option value="title" className="p-2 mb-2 font-semibold">
+            Alphabetically, A-Z
           </option>
-          <option value="" className="p-2 mb-2">
-            Best Selling
+          <option value="-title" className="p-2 mb-2 font-semibold">
+            Alphabetically, Z-A
           </option>
-          <option value="" className="p-2 mb-2">
-            Best Selling
+          <option value="price" className="p-2 mb-2 font-semibold">
+            Price, low to high
+          </option>
+          <option value="-price" className="p-2 mb-2 font-semibold">
+            Price, high to low
+          </option>
+          <option value="createdAt" className="p-2 mb-2 font-semibold">
+            Date, old to new
+          </option>
+          <option value="-createdAt" className="p-2 mb-2 font-semibold">
+            Date, new to old
           </option>
         </select>
       </div>

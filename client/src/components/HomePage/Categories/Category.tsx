@@ -1,4 +1,4 @@
-import laptop from "../../../../public/assets/images/laptop.jpg"
+import laptop from "../../../assets/images/laptop.jpg"
 import { Link } from "react-router-dom"
 
 function Category() {

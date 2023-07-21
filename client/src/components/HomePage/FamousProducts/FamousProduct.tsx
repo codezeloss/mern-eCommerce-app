@@ -1,4 +1,4 @@
-import laptop from "../../../../public/assets/images/tab3.jpg"
+import laptop from "../../../assets/images/tab3.jpg"
 
 function FamousProduct() {
   return (

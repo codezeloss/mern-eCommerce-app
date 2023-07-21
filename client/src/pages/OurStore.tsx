@@ -18,16 +18,33 @@ interface Props {
 }
 
 function OurStore() {
-  const [grid, setGrid] = useState(3)
   const dispatch = useDispatch()
+  const [grid, setGrid] = useState(3)
+  const [sort, setSort] = useState("")
+  const [brand, setBrand] = useState("")
+  const [category, setCategory] = useState("")
+  const [tag, setTag] = useState("")
+  const [minPrice, setMinPrice] = useState(null)
+  const [maxPrice, setMaxPrice] = useState(null)
 
-  const productState = useSelector((state: any) => state.product)
-  const { isError, isLoading, isSuccess, products } = productState
+  // ** RTK - Products state
+  const productsState = useSelector((state: any) => state.product.products)
+  const { isError, isLoading, isSuccess } = productsState
+  const productState = useSelector((state: any) => state.product.product)
 
+  // ** Get All Products
   useEffect(() => {
+    const sortBy = {
+      sort,
+      brand,
+      category,
+      tag,
+      minPrice,
+      maxPrice,
+    }
     // @ts-ignore
-    dispatch(getAllProducts())
-  }, [])
+    dispatch(getAllProducts(sortBy))
+  }, [sort, brand, category, tag, minPrice, maxPrice])
 
   return (
     <>
@@ -39,14 +56,31 @@ function OurStore() {
         <div className="container">
           <div className="w-full flex gap-4">
             <div className="w-[300px] h-full">
-              <SideFilters />
+              <SideFilters
+                brand={brand}
+                setBrand={setBrand}
+                category={category}
+                setCategory={setCategory}
+                tag={tag}
+                setTag={setTag}
+                minPrice={minPrice}
+                setMinPrice={setMinPrice}
+                maxPrice={maxPrice}
+                setMaxPrice={setMaxPrice}
+              />
             </div>
 
             <div className="w-full mb-20">
-              <TopFilters grid={grid} setGrid={setGrid} />
+              <TopFilters
+                grid={grid}
+                setGrid={setGrid}
+                sort={sort}
+                setSort={(e: any) => setSort(e.target.value)}
+              />
+
               <div className={`w-full grid grid-cols-${grid} gap-4 py-4`}>
-                {products &&
-                  products.map(
+                {productsState &&
+                  productsState.map(
                     (product: Props, index: React.Key | null | undefined) => (
                       <div key={index}>
                         <StoreProduct

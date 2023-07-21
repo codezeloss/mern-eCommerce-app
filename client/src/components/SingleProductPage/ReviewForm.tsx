@@ -1,49 +1,73 @@
 import Rating from "@mui/material/Rating"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { number, object, string } from "yup"
+import { useFormik } from "formik"
+import { toast } from "react-toastify"
+import { useDispatch, useSelector } from "react-redux"
+import { addProductReview } from "../../features/product/productSlice"
+import { useLocation } from "react-router-dom"
+
+// ** yup Validation
+let reviewSchema = object({
+  star: number().required("Rating stars are required"),
+  comment: string().required("Comment is required"),
+})
 
 function ReviewForm() {
-  const [value, setValue] = useState(0)
+  const dispatch = useDispatch()
+  const location = useLocation()
+
+  // ** Get current product ID
+  const productId = location.pathname.split("/")[2]
+
+  // ** RTK
+  const productState = useSelector((state: any) => state.product)
+  const { isSuccess, isError, isLoading, product } = productState
+
+  // ** Formik
+  const formik = useFormik({
+    initialValues: {
+      star: 0,
+      comment: "",
+      productId: productId,
+    },
+    validationSchema: reviewSchema,
+    onSubmit: (values) => {
+      // @ts-ignore
+      dispatch(addProductReview(values))
+      formik.resetForm()
+      setTimeout(() => {
+        // ** Toast Pop-up Notification
+        if (isSuccess && product) {
+          toast.success("Review added successfully!", {})
+        }
+        if (isError) {
+          toast.error("Something went wrong!!", {})
+        }
+      }, 300)
+    },
+  })
 
   return (
     <div className="py-5 border-t-gray/[.1] border-t mt-4">
-      <form className="text-sm text-gray flex flex-col gap-3">
-        {/*<div>
-        <label htmlFor="name">Name</label>
-        <input
-          className="mt-1"
-          name="name"
-          type="text"
-          placeholder="Enter your name"
-        />
-      </div>
-        <div>
-        <label htmlFor="name">Email</label>
-        <input
-        className="mt-1"
-        name="email"
-        type="text"
-        placeholder="ali.ahmed@example.com"
-        />
-        </div>
-        <div>
-        <label htmlFor="name">Review Title</label>
-        <input
-        className="mt-1"
-        name="title"
-        type="text"
-        placeholder="Give your review a title"
-        />
-        </div>*/}
+      <form
+        className="text-sm text-gray flex flex-col gap-3"
+        onSubmit={formik.handleSubmit}
+      >
         <div>
           <p>Rating</p>
           <Rating
             sx={{ fontSize: 18, mt: 0.5 }}
             name="rating"
-            value={value}
-            onChange={(e: any) => {
-              setValue(e.target.value)
-            }}
+            onBlur={formik.handleBlur("star")}
+            onChange={formik.handleChange("star")}
+            value={formik.values.star}
           />
+          {formik.touched.star && formik.errors.star ? (
+            <div className="error">
+              <p>{formik.errors.star}</p>
+            </div>
+          ) : null}
         </div>
         <div>
           <label htmlFor="name">Comment</label>
@@ -53,7 +77,15 @@ function ReviewForm() {
             cols={30}
             rows={10}
             placeholder="Write your comment here..."
+            onBlur={formik.handleBlur("comment")}
+            onChange={formik.handleChange("comment")}
+            value={formik.values.comment}
           />
+          {formik.touched.comment && formik.errors.comment ? (
+            <div className="error">
+              <p>{formik.errors.comment}</p>
+            </div>
+          ) : null}
         </div>
 
         <div className="w-full flex items-center justify-between">

@@ -76,7 +76,7 @@ function SingleProduct() {
     <>
       <div>
         <div className="flex items-center justify-center">
-          <BreadCrumb path="/products/:id" title="Single Product Page" />
+          <BreadCrumb path="/products/:id" title={`${productState?.title}`} />
         </div>
 
         <div className="bg-lightGray h-full py-6">

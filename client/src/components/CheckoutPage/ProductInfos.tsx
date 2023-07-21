@@ -1,4 +1,4 @@
-import speaker from "../../../public/assets/images/speaker.jpg"
+import speaker from "../../assets/images/speaker.jpg"
 
 interface Props {
   image: any

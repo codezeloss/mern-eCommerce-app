@@ -75,7 +75,7 @@ export const addProductToUserCart = createAsyncThunk(
 
 // ** GET User Cart
 export const getUserCart = createAsyncThunk(
-  "auth/get-cart",
+  "auth/user-cart",
   async (thunkAPI) => {
     try {
       return await authService.getCart()
@@ -157,6 +157,19 @@ export const forgotPasswordToken = createAsyncThunk(
   async (data: any, thunkAPI) => {
     try {
       return await authService.forgotPassToken(data)
+    } catch (e) {
+      // @ts-ignore
+      return thunkAPI.rejectWithValue(e)
+    }
+  },
+)
+
+// ** PUT Reset User password
+export const resetUserPassword = createAsyncThunk(
+  "auth/reset-password",
+  async (data: any, thunkAPI) => {
+    try {
+      return await authService.resetPassword(data)
     } catch (e) {
       // @ts-ignore
       return thunkAPI.rejectWithValue(e)
@@ -362,6 +375,23 @@ export const authSlice = createSlice({
         state.message = "success"
       })
       .addCase(forgotPasswordToken.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(resetUserPassword.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(resetUserPassword.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        // @ts-ignore
+        state.newPassword = action.payload
+        state.message = "success"
+      })
+      .addCase(resetUserPassword.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.isSuccess = false
