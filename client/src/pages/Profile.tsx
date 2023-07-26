@@ -5,7 +5,7 @@ import ProfileForm from "../components/ProfilePage/ProfileForm"
 function Profile() {
   return (
     <>
-      <main>
+      <main className="h-full">
         <div className="flex items-center justify-center">
           <BreadCrumb path="/profile" title="Profile" />
         </div>

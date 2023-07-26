@@ -41,7 +41,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const foundUser = await User.findOne({ email });
 
   if (!foundUser) {
-    res.status(404).json("User not found!");
+    throw new Error("Invalid Credentials");
     return;
   }
 
@@ -406,7 +406,7 @@ const getWishlist = asyncHandler(async (req, res) => {
 // @desc   User CartPage
 // @route  POST /cart
 // @access Private
-const userCart = asyncHandler(async (req, res) => {
+const addToCart = asyncHandler(async (req, res) => {
   const { productId, color, quantity, price } = req.body;
   const { id } = req.user;
 
@@ -429,7 +429,6 @@ const userCart = asyncHandler(async (req, res) => {
 // @access Private
 const getUserCart = asyncHandler(async (req, res) => {
   const { id } = req.user;
-  validateMongodbId(id);
 
   try {
     const cart = await Cart.find({ userId: id })
@@ -509,7 +508,7 @@ const createOrder = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc   Get My Orders
+// @desc   Get User Orders
 // @route  GET /get-my-orders
 // @access Private
 const getMyOrders = asyncHandler(async (req, res) => {
@@ -521,6 +520,156 @@ const getMyOrders = asyncHandler(async (req, res) => {
       .populate("orderItems.product")
       .populate("orderItems.color");
     res.json(orders);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc   Get All Orders
+// @route  GET /orders
+// @access Private
+const getAllOrders = asyncHandler(async (req, res) => {
+  try {
+    const orders = await Order.find().populate("user");
+    res.json(orders);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc   Get Single Order
+// @route  GET /order/:id
+// @access Private
+const getSingleOrder = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const orders = await Order.findOne({ _id: id })
+      .populate("orderItems.product")
+      .populate("user")
+      .populate("orderItems.color");
+    res.json(orders);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc   Update Order
+// @route  PUT /update-order/:id
+// @access Private
+const updateOrder = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const orders = await Order.findByIdAndUpdate(
+      id,
+      { orderStatus: req.body.status },
+      { new: true }
+    );
+    await orders.save();
+    res.json(orders);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+// @desc   Get Monthly Orders Income
+// @route  GET /total-orders
+// @access Private
+const getMonthWiseOrderIncome = asyncHandler(async (req, res) => {
+  let date = new Date();
+  let endDate = "";
+
+  date.setDate(1);
+
+  for (let i = 0; i < 11; i++) {
+    date.setMonth(date.getMonth() - 1);
+    endDate = months[date.getMonth()] + " " + date.getFullYear();
+  }
+
+  const data = await Order.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $lte: new Date(),
+          $gte: new Date(endDate),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          month: "$month",
+        },
+        amount: { $sum: "$totalPriceAfterDiscount" },
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+  res.json(data);
+});
+
+// @desc   Get Yearly Total Orders
+// @route  GET /yearly-income
+// @access Private
+const getYearlyTotalOrders = asyncHandler(async (req, res) => {
+  let date = new Date();
+  let endDate = "";
+
+  date.setDate(1);
+
+  for (let i = 0; i < 11; i++) {
+    date.setMonth(date.getMonth() - 1);
+    endDate = months[date.getMonth()] + " " + date.getFullYear();
+  }
+
+  const data = await Order.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $lte: new Date(),
+          $gte: new Date(endDate),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$month",
+        count: { $sum: 1 },
+        amount: { $sum: "$totalPriceAfterDiscount" },
+      },
+    },
+  ]);
+  res.json(data);
+});
+
+// @desc   Get Order By User ID
+// @route  POST /orders-by-user
+// @access Private
+const getOrderByUserId = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  validateMongodbId(id);
+
+  try {
+    const userOrders = await Order.findOne({ orderBy: id })
+      .populate("product.product")
+      .populate("orderBy")
+      .exec();
+    res.json(userOrders);
   } catch (error) {
     throw new Error(error);
   }
@@ -543,12 +692,18 @@ module.exports = {
   resetPassword,
   getWishlist,
   saveAddress,
-  userCart,
+  addToCart,
   getUserCart,
   removeProductFromCart,
   updateCartProductQuantity,
   createOrder,
   getMyOrders,
+  getMonthWiseOrderIncome,
+  getYearlyTotalOrders,
+  getOrderByUserId,
+  getAllOrders,
+  getSingleOrder,
+  updateOrder,
 };
 
 {
@@ -672,23 +827,7 @@ module.exports = {
     }
   });
 
-  // @desc   Get Order By User ID
-  // @route  POST /orders-by-user
-  // @access Private
-  const getOrderByUserId = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    validateMongodbId(id);
 
-    try {
-      const userOrders = await Order.findOne({ orderBy: id })
-        .populate("product.product")
-        .populate("orderBy")
-        .exec();
-      res.json(userOrders);
-    } catch (error) {
-      throw new Error(error);
-    }
-  });
 
   // @desc   Update Order Status
   // @route  PUT /order/update-order/:id

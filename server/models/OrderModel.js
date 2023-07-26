@@ -50,18 +50,6 @@ const OrderSchema = new Schema(
         type: Date,
         default: Date.now(),
       },
-      totalPrice: {
-        type: Number,
-        required: true,
-      },
-      totalPriceAfterDiscount: {
-        type: Number,
-        required: true,
-      },
-      orderStatus: {
-        type: String,
-        default: "Ordered",
-      },
     },
     orderItems: [
       {
@@ -85,6 +73,22 @@ const OrderSchema = new Schema(
         },
       },
     ],
+    month: {
+      type: Number,
+      default: new Date().getMonth(),
+    },
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    totalPriceAfterDiscount: {
+      type: Number,
+      required: true,
+    },
+    orderStatus: {
+      type: String,
+      default: "Ordered",
+    },
   },
   {
     timestamps: true,

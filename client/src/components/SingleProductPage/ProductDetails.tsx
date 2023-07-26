@@ -106,7 +106,11 @@ function ProductDetails({
             colors.map((color: any, index: React.Key | null | undefined) => {
               return (
                 <div
-                  style={{ backgroundColor: color.title.toLowerCase() }}
+                  style={{
+                    backgroundColor: color?.title
+                      ? color?.title.toLowerCase()
+                      : "",
+                  }}
                   key={index}
                   className={`w-fit p-3 rounded-full cursor-pointer`}
                   onClick={() => setEnteredColor(color._id)}

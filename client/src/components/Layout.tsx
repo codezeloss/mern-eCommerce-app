@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css"
 
 function Layout() {
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="h-full flex flex-col justify-between">
       <ToastContainer
         position="top-center"
         autoClose={2000}

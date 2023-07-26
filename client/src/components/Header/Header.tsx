@@ -34,10 +34,31 @@ function Header() {
   const userCartState = useSelector((state: any) => state.auth.userCart)
   const productsState = useSelector((state: any) => state.product.products)
 
+  // ** Axios Config
+  // @ts-ignore
+  let getTokenFromLocalStorage
+  if (localStorage.getItem("user")) {
+    // @ts-ignore
+    getTokenFromLocalStorage = JSON.parse(localStorage.getItem("user"))
+  } else {
+    getTokenFromLocalStorage = ""
+  }
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage.token !== null
+          ? getTokenFromLocalStorage.token
+          : ""
+      }`,
+      Accept: "application/json",
+    },
+  }
+
   // ** Get user cart
   useEffect(() => {
     // @ts-ignore
-    dispatch(getUserCart())
+    dispatch(getUserCart(config2))
   }, [])
 
   // ** Get Total cart Amount
@@ -75,7 +96,7 @@ function Header() {
 
   return (
     <>
-      <header className="bg-primary text-white">
+      <header className="bg-primary text-white top-0 left-0 right-0">
         <div className="border-b-[1px] border-b-white/[.2]">
           <div
             className={
@@ -88,11 +109,9 @@ function Header() {
               <p>Hotline: (212) 6 6666 6666</p>
               <div className="flex items-center gap-1">
                 <p>English</p>
-                <ChevronDown />
               </div>
               <div className="flex items-center gap-1">
                 <p>USD $</p>
-                <ChevronDown />
               </div>
             </div>
           </div>
@@ -128,12 +147,14 @@ function Header() {
             </div>
 
             <div className="flex space-x-4 py-6">
-              <HeaderLinks
-                path="compare-products"
-                src={arrowPath}
-                text_t="Compare"
-                text_b="Products"
-              />
+              {/*
+                <HeaderLinks
+                  path="compare-products"
+                  src={arrowPath}
+                  text_t="Compare"
+                  text_b="Products"
+                />
+              */}
               <HeaderLinks
                 path="wishlist"
                 src={heart}

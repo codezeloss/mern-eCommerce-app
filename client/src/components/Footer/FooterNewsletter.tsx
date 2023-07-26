@@ -2,7 +2,7 @@ import newsletter from "../../assets/icons/newspaper-icon.svg"
 
 function FooterNewsletter() {
   return (
-    <div className="bg-secondary py-5 border-b border-b-[1px] border-b-white/[.2]">
+    <div className="bg-secondary py-5 border-b-[1px] border-b-white/[.2]">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img className="w-8 h-8" src={newsletter} alt="Newsletter" />

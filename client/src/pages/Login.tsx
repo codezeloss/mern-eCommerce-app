@@ -4,7 +4,7 @@ import LoginForm from "../components/LoginPage/LoginForm"
 function Login() {
   return (
     <>
-      <div>
+      <div className="h-full">
         <div className="flex items-center justify-center">
           <BreadCrumb path="/account" title="Login" />
         </div>

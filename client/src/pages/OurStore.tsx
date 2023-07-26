@@ -47,7 +47,7 @@ function OurStore() {
   }, [sort, brand, category, tag, minPrice, maxPrice])
 
   return (
-    <>
+    <div className="h-full">
       <div className="flex items-center justify-center">
         <BreadCrumb title="Our Store" path="/store" />
       </div>
@@ -101,7 +101,7 @@ function OurStore() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

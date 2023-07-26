@@ -16,6 +16,7 @@ interface Props {
   color: string
   price: number
   quantity: number
+  config2: any
 }
 
 interface DataProps {
@@ -31,6 +32,7 @@ function ProductCart({
   color,
   price,
   quantity,
+  config2,
 }: Props) {
   const dispatch = useDispatch()
   const [productUpdateDetails, setProductUpdateDetails] =
@@ -39,7 +41,7 @@ function ProductCart({
   // **
   useEffect(() => {
     // @ts-ignore
-    dispatch(getUserCart())
+    dispatch(getUserCart(config2))
   }, [])
 
   // **
@@ -53,7 +55,7 @@ function ProductCart({
       dispatch(updateProductCartQuantity(data))
       setTimeout(() => {
         // @ts-ignore
-        dispatch(getUserCart())
+        dispatch(getUserCart(config2))
       }, 200)
     }
   }, [productUpdateDetails])
@@ -108,11 +110,12 @@ function ProductCart({
           className=""
           type="button"
           onClick={() => {
+            const data = { productId: productId, config2: config2 }
             // @ts-ignore
-            dispatch(deleteProductFromCart(productId))
+            dispatch(deleteProductFromCart(data))
             setTimeout(() => {
               // @ts-ignore
-              dispatch(getUserCart())
+              dispatch(getUserCart(config2))
             }, 200)
           }}
         >

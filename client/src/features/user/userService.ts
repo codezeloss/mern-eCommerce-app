@@ -28,15 +28,15 @@ const addToCart = async (cartData: any) => {
   return response.data
 }
 
-const getCart = async () => {
-  const response = await axios.get(`${base_url}user/cart`, config)
+const getCart = async (data: any) => {
+  const response = await axios.get(`${base_url}user/cart`, data)
   return response.data
 }
 
-const removeProductFromCart = async (cartItemId: any) => {
+const removeProductFromCart = async (data: any) => {
   const response = await axios.delete(
-    `${base_url}user/delete-cart-product/${cartItemId}`,
-    config,
+    `${base_url}user/delete-cart-product/${data.productId}`,
+    data.config2,
   )
   return response.data
 }

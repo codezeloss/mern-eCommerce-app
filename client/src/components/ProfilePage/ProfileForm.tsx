@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { object, string } from "yup"
 import { useFormik } from "formik"
 import { useDispatch, useSelector } from "react-redux"
@@ -28,25 +28,20 @@ function ProfileForm() {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstname: "" || user?.firstname,
-      lastname: "" || user?.lastname,
-      email: "" || user?.email,
-      mobile: "" || user?.mobile,
+      firstname: "" || String(user?.firstname),
+      lastname: "" || String(user?.lastname),
+      email: "" || String(user?.email),
+      mobile: "" || String(user?.mobile),
     },
     validationSchema: profileSchema,
     onSubmit: (values: any) => {
       // @ts-ignore
       dispatch(updateUserProfile(values))
       setEdit(true)
-      setTimeout(() => {
-        // ** Toast Notification & Redirect user
-        if (isSuccess && user) {
-          toast.success("Profile Updated successfully!", {})
-        }
-        if (isError) {
-          toast.error("Something went wrong!!", {})
-        }
-      }, 300)
+      // ** Toast Notification & Redirect user
+      if (isSuccess && user) {
+        toast.success("Profile Updated successfully!", {})
+      }
     },
   })
 

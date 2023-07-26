@@ -26,7 +26,7 @@ function Blogs() {
   }, [])
 
   return (
-    <div className="container mb-20">
+    <div className="container pb-20">
       <div className="flex items-center justify-between mb-4">
         <h2 className="font-bold text-2xl">Our Latest Blogs</h2>
         <div className="flex items-center gap-2">

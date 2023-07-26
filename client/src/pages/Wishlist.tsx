@@ -25,12 +25,12 @@ function Wishlist() {
 
   return (
     <>
-      <div>
+      <div className="h-full">
         <div className="flex items-center justify-center">
           <BreadCrumb path="/wishlist" title="Wishlist" />
         </div>
 
-        <div className="bg-lightGray h-full py-6">
+        <div className="bg-lightGray min-h-full h-full py-6">
           <div className="container mb-20">
             {!wishlistState && (
               <h1 className="text-xl text-center font-semibold text-secondary">

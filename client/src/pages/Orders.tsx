@@ -17,12 +17,12 @@ function Orders() {
 
   return (
     <>
-      <main>
+      <main className="h-full">
         <div className="flex items-center justify-center">
           <BreadCrumb path="/orders" title="My Orders" />
         </div>
 
-        <div className="text-center bg-lightGray h-full min-h-[450px] py-6">
+        <div className="text-center bg-white h-full min-h-[450px] py-6">
           <div className="container mb-20">
             <div>
               <div className="grid grid-cols-4 mb-10 text-gray/[.8] text-sm">
@@ -106,7 +106,7 @@ function Orders() {
                               className={`w-fit p-3 rounded-full cursor-pointer text-center`}
                               style={{
                                 backgroundColor:
-                                  (order?.orderItems[0]?.color.title).toLowerCase(),
+                                  order?.orderItems[0]?.color.title,
                               }}
                             />
                           </div>

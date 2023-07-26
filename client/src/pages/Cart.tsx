@@ -10,13 +10,34 @@ function Cart() {
   const dispatch = useDispatch()
   const [totalAmount, setTotalAmount] = useState(0)
 
+  // ** Axios Config
+  // @ts-ignore
+  let getTokenFromLocalStorage
+  if (localStorage.getItem("user")) {
+    // @ts-ignore
+    getTokenFromLocalStorage = JSON.parse(localStorage.getItem("user"))
+  } else {
+    getTokenFromLocalStorage = ""
+  }
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage.token !== null
+          ? getTokenFromLocalStorage.token
+          : ""
+      }`,
+      Accept: "application/json",
+    },
+  }
+
   // ** RTK - User cart state
-  const userCartState = useSelector((state: any) => state.auth.userCart)
+  const userCartState = useSelector((state: any) => state.auth?.userCart)
 
   // ** Get user cart
   useEffect(() => {
     // @ts-ignore
-    dispatch(getUserCart())
+    dispatch(getUserCart(config2))
   }, [])
 
   // ** Calculate Total cart Amount
@@ -34,12 +55,12 @@ function Cart() {
 
   return (
     <>
-      <div>
+      <div className="h-full">
         <div className="flex items-center justify-center">
           <BreadCrumb path="/cart" title="Shopping Cart" />
         </div>
 
-        <div className="bg-lightGray h-full py-6">
+        <div className="bg-lightGray h-full min-h-[450px] py-6">
           <div className="container mb-20">
             <div className="grid grid-cols-5 mb-10 text-gray/[.8] text-sm">
               <div className="col-span-2">
@@ -56,18 +77,37 @@ function Cart() {
               </div>
             </div>
 
+            {!userCartState && (
+              <h1 className="text-xl text-center font-semibold text-secondary mb-14">
+                Your Cart is empty
+              </h1>
+            )}
+
             <div>
               {userCartState &&
                 userCartState.map((product: any, index: React.Key) => (
                   <div key={index}>
                     <ProductCart
                       itemId={userCartState[index]?._id}
-                      productId={userCartState[index]?.productId._id}
-                      image={userCartState[index]?.productId.images[0]?.url}
-                      title={userCartState[index]?.productId.title}
+                      productId={
+                        userCartState[index]?.productId === null
+                          ? ""
+                          : userCartState[index]?.productId._id
+                      }
+                      image={
+                        userCartState[index]?.productId === null
+                          ? ""
+                          : userCartState[index]?.productId.images[0]?.url
+                      }
+                      title={
+                        userCartState[index]?.productId === null
+                          ? ""
+                          : userCartState[index]?.productId.title
+                      }
                       color={userCartState[index]?.color.title}
                       price={userCartState[index]?.price}
                       quantity={userCartState[index]?.quantity}
+                      config2={config2}
                     />
                   </div>
                 ))}
@@ -80,7 +120,7 @@ function Cart() {
               Continue Shopping
             </Link>
 
-            {(totalAmount !== null || totalAmount !== 0) && (
+            {!(totalAmount !== null || totalAmount !== 0) && (
               <div className="flex items-center mt-10 justify-between">
                 <div />
                 <div>

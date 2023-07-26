@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useFormik } from "formik"
-import { loginUser } from "../../features/user/userSlice"
+import { getUserCart, loginUser } from "../../features/user/userSlice"
 import { toast } from "react-toastify"
 import { object, string } from "yup"
+import { useEffect } from "react"
 
 // ** yup Validation
 let signupSchema = object({
@@ -29,18 +30,17 @@ function LoginForm() {
     onSubmit: (values) => {
       // @ts-ignore
       dispatch(loginUser(values))
-      setTimeout(() => {
-        // ** Toast Notification & Redirect user
-        if (isSuccess && user !== null) {
-          toast.success("Login successfully!", {})
-          navigate("/")
-        }
-        if (isError) {
-          toast.error("Something went wrong!!", {})
-        }
-      }, 300)
     },
   })
+
+  // ** Toast notification & Redirect the User
+  useEffect(() => {
+    if (isSuccess && user) {
+      toast.success("Login successfully!", {})
+      window.location.reload()
+      navigate("/")
+    }
+  }, [userState])
 
   return (
     <div className="py-10 mx-auto">

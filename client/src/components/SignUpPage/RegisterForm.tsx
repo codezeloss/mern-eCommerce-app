@@ -19,11 +19,11 @@ function RegisterForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // RTK
+  // ** RTK -- User state
   const userState = useSelector((state: any) => state.auth)
   const { isLoading, isError, isSuccess, createdUser } = userState
 
-  // Formik
+  // ** Formik
   const formik = useFormik({
     initialValues: {
       firstname: "",
@@ -39,14 +39,11 @@ function RegisterForm() {
     },
   })
 
-  // Toast Notification
+  // ** Toast Notification && Redirect the user
   useEffect(() => {
     if (isSuccess && createdUser) {
       toast.success("User created successfully!", {})
       navigate("/account")
-    }
-    if (isError) {
-      toast.error("Something went wrong!!", {})
     }
   }, [isSuccess, isError, isLoading, createdUser])
 
