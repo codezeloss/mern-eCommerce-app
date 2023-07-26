@@ -6,13 +6,34 @@ import { getUserOrders } from "../features/user/userSlice"
 function Orders() {
   const dispatch = useDispatch()
 
+  // ** Axios Config
+  // @ts-ignore
+  let getTokenFromLocalStorage
+  if (localStorage.getItem("user")) {
+    // @ts-ignore
+    getTokenFromLocalStorage = JSON.parse(localStorage.getItem("user"))
+  } else {
+    getTokenFromLocalStorage = ""
+  }
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorage.token !== null
+          ? getTokenFromLocalStorage.token
+          : ""
+      }`,
+      Accept: "application/json",
+    },
+  }
+
   // ** RTK - User Orders state
   const userOrdersState = useSelector((state: any) => state.auth.userOrders)
 
   // **
   useEffect(() => {
     // @ts-ignore
-    dispatch(getUserOrders())
+    dispatch(getUserOrders(config2))
   }, [])
 
   return (

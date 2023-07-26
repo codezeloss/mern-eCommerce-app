@@ -36,9 +36,8 @@ function LoginForm() {
   // ** Toast notification & Redirect the User
   useEffect(() => {
     if (isSuccess && user) {
-      toast.success("Login successfully!", {})
-      window.location.reload()
       navigate("/")
+      toast.success("Login successfully!", {})
     }
   }, [userState])
 

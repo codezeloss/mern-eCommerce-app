@@ -128,9 +128,9 @@ export const createNewOrder = createAsyncThunk(
 // ** GET User Orders
 export const getUserOrders = createAsyncThunk(
   "auth/get-user-orders",
-  async (thunkAPI) => {
+  async (data: any, thunkAPI) => {
     try {
-      return await authService.userOrders()
+      return await authService.userOrders(data)
     } catch (e) {
       // @ts-ignore
       return thunkAPI.rejectWithValue(e)

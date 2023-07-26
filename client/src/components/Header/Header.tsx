@@ -78,6 +78,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.clear()
     window.location.reload()
+    navigate("/")
   }
 
   // ** Search by product
